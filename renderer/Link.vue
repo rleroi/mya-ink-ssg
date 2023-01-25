@@ -7,8 +7,13 @@
 a {
   padding: 3px 10px;
 }
-a.active {
-  background-color: #eee;
+/* a.active {
+  @apply bg-neutral-100
+  @apply underline;
+} */
+
+a:hover/*:not(a.active)*/ {
+  @apply underline;
 }
 </style>
 <script setup>

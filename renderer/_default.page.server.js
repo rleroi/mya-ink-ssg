@@ -1,7 +1,7 @@
 import { renderToString } from '@vue/server-renderer'
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr'
 import { createApp } from './app'
-import logoUrl from './logo.svg'
+import logoUrl from './favicon.png'
 
 export { render }
 // See https://vite-plugin-ssr.com/data-fetching
@@ -13,8 +13,8 @@ async function render(pageContext) {
 
   // See https://vite-plugin-ssr.com/head
   const { documentProps } = pageContext.exports
-  const title = (documentProps && documentProps.title) || 'Vite SSR app'
-  const desc = (documentProps && documentProps.description) || 'App using Vite + vite-plugin-ssr'
+  const title = (documentProps && documentProps.title) || 'Mya-Ink.nl – Tattooshop Woerden'
+  const desc = (documentProps && documentProps.description) || 'Mya-Ink.nl – Tattooshop Woerden'
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">

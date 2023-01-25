@@ -1,0 +1,14 @@
+@import url(https://fonts.bunny.net/css?family=abhaya-libre:400|inter:400,500,600,700,800,900);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+ font-family: 'Inter', sans-serif;
+ font-size: 18px;
+}
+
+.title {
+    font-family: 'Abhaya Libre', serif;
+}
