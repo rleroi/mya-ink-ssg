@@ -1,5 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import {createClient} from 'contentful';
+import pkg from 'contentful';
+const { createClient } = pkg;
 
 export const client = createClient({
   space: process.env.SPACE_ID,
