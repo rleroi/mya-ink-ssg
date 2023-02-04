@@ -13,3 +13,11 @@ html, body {
 .title {
     font-family: 'Abhaya Libre', serif;
 }
+
+p {
+    @apply mb-4
+}
+
+ul {
+    @apply list-disc ml-6
+}

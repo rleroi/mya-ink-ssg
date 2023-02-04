@@ -1,14 +1,7 @@
 <template>
-  <h3 class="title text-4xl">Portfolio</h3>
-  <div class="mt-16">
-    <p>
-      Wil je een tatoeage laten zetten in een specifieke stijl?<br />
-      Mya zet hele fijne lijntjes van hele kleine tot grote tatoeages in diverse tattoo stijlen zoals:
-    </p>
-    <p>
-      <strong>Black and grey | color tattoos | watercolor tattoos | asian style tattoos | oldschool tattoos | realistic tattoos | fine line tattoos | sketch style tattoos | freehand tattoos</strong>
-    </p>
-  </div>
+  <h3 v-if="page.title" class="title text-4xl mb-16">{{page.title}}</h3>
+  <div v-html="page.html"></div>
+
   <div class="mt-8" style="font-size: 10px">
     <div id="curator-feed-default-feed-layout"><a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a></div>
   </div>
@@ -18,6 +11,11 @@
     </a>
   </div>
 </template>
+
+<script>
+    const pageProps = ['page'];
+    export default {props: pageProps};
+</script>
 
 <script setup>
 import { onMounted } from 'vue';

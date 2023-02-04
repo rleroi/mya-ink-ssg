@@ -1,31 +1,23 @@
 <template>
-  <h3 class="title text-4xl">Maak een afspraak</h3>
-  <div class="mt-16">
-    <p>
-      Wil je een afspraak maken voor het zetten van een tattoo of wil je een tattoo bespreking inplannen?<br />
-      Laat dan een bericht achter via het contactformulier hieronder.
-    </p>
-    <p>
-      Of stuur een email naar <a class="underline" href="mailto:info@mya-ink.nl">info@mya-ink.nl</a>
-    </p>
-  </div>
+  <h3 v-if="page.title" class="title text-4xl mb-16">{{page.title}}</h3>
+  <div v-html="page.html"></div>
 
   <div class="mt-8">
-    <form class="flex flex-col md:max-w-sm" action="https://formkeep.com/f/dc52ec5b142e" accept-charset="UTF-8" enctype="multipart/form-data" method="POST">
+    <form @submit.prevent="sendMail" ref="form" class="flex flex-col md:max-w-sm" action="#" accept-charset="UTF-8" enctype="multipart/form-data" method="POST">
       <div>Uw naam*</div>
-      <input required class="mb-8 border-neutral-400 border" type="text" />
+      <input required v-model="mail.name" class="mb-8 border-neutral-400 border" type="text" />
 
       <div>Uw mailadres*</div>
-      <input required class="mb-8 border-neutral-400 border" type="email" />
+      <input required v-model="mail.address" class="mb-8 border-neutral-400 border" type="email" />
 
       <div>Uw telefoonnummer</div>
-      <input class="mb-8 border-neutral-400 border" type="tel" />
+      <input v-model="mail.phone" class="mb-8 border-neutral-400 border" type="tel" />
 
       <div>Omschrijf de gewenste tattoo (Grootte, plaatsing, etc.)*</div>
-      <textarea required class="mb-8 border-neutral-400 border" cols="40" rows="10"></textarea>
+      <textarea required v-model="mail.body" class="mb-8 border-neutral-400 border" cols="40" rows="10"></textarea>
 
       <div>Voeg eventueel een afbeelding toe</div>
-      <input class="mb-8" type="file" />
+      <input @change="mail.file = $event.target.files?.[0]" class="mb-8" type="file" accept="image/*" tabindex="-1" />
 
       <div>
         <input type="submit" class="bg-primary px-8 py-4 text-white" role="button" value="Verzenden">
@@ -36,7 +28,45 @@
 
 </template>
 
+<script>
+    const pageProps = ['page'];
+    export default {props: pageProps};
+</script>
+
 <script setup>
+import { reactive, ref } from 'vue'
+
+const form = ref(null);
+
+const mail = reactive({
+  name: null,
+  address: null,
+  phone: null,
+  body: null,
+  file: null,
+});
+
+function sendMail() {
+  let formData = new FormData();
+  for(const [key, value] of Object.entries(mail)) {
+    formData.append(key, value);
+  }
+
+  try {
+    fetch('http://127.0.0.1:8788/api/contact', {
+      method: 'POST',
+      body: formData,
+    });
+  } catch(e) {
+    console.error(e.message);
+    window.alert('Er ging iets fout, probeer het later opnieuw of mail naar info@mya-ink.nl');
+  }
+
+  for(const [key, value] of Object.entries(mail)) {
+    mail[key] = null;
+  }
+  form.value.reset();
+}
 </script>
 
 <style scoped>
