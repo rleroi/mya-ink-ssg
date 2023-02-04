@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col w-auto max-w-screen-xl xl:mx-auto px-8 py-8 md:px-16 md:py-16" :class="{'h-screen overflow-hidden': state.menuOpen}">
     <div v-show="state.menuOpen" class="absolute left-0 top-0 w-full h-full z-50 flex flex-col lg:hidden bg-white px-8 py-8">
-      <button @click="openMenu(false)" class="ml-auto mb-8">
+      <button aria-label="Menu" @click="openMenu(false)" class="ml-auto mb-8">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M13 11.8l6.1-6.3-1-1-6.1 6.2-6.1-6.2-1 1 6.1 6.3-6.5 6.7 1 1 6.5-6.6 6.5 6.6 1-1z"></path></svg>
       </button>
       <ol class="flex flex-col text-right">
@@ -13,7 +13,15 @@
     </div>
 
     <div class="flex justify-between">
-      <div class="w-1/2"><a href="/"><img src="./myaink.png" alt="Mya Ink - Tattooshop Woerden"></a></div>
+      <div class="w-1/2">
+        <a href="/" title="Mya Ink">
+          <picture>
+            <source srcset="./myaink.webp" type="image/webp">
+            <source srcset="./myaink.png" type="image/png"> 
+            <img src="./myaink.png" alt="Mya Ink - Tattooshop Woerden">
+          </picture>
+        </a>
+      </div>
       <div class="w-1/2 self-center justify-end hidden lg:flex">
         <Link href="/faq">FAQ</Link>
         <Link href="/nazorg">Nazorg</Link>
