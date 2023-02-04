@@ -35,7 +35,4 @@ onMounted(() => {
 </script>
 
 <style scoped>
-p {
-  @apply mb-4
-}
 </style>

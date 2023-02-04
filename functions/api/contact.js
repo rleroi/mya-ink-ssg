@@ -7,7 +7,7 @@ async function toBase64(file) {
 export async function onRequestPost(context) {
   const formData = await context.request.formData();
 
-  let attachments = [];
+  let attachments = null;
 
   if (formData.get('file')?.size) {
     const fileAsBase64 = await toBase64(formData.get('file'));
@@ -29,14 +29,14 @@ export async function onRequestPost(context) {
           {
             to: [
               {
-                email: 'info@mya-ink.nl',
+                email: context.env.CONTACT_EMAIL_TO,
                 name: 'Mya Ink',
               },
             ],
           },
         ],
         from: {
-          email: 'info@mya-ink.nl',
+          email: context.env.CONTACT_EMAIL_FROM,
           name: 'Mya Ink Contactformulier',
         },
         reply_to: {
@@ -47,11 +47,11 @@ export async function onRequestPost(context) {
         content: [
           {
             type: 'text/html',
-            value: `<p><strong>Van</strong>: ${formData.get('name') || ''}</p>
-            <p><strong>Email</strong>: ${formData.get('address') || ''}</p>
+            value: `<p><strong>Van</strong>: ${formData.get('name')}</p>
+            <p><strong>Email</strong>: ${formData.get('address')}</p>
             <p><strong>Tel</strong>: ${formData.get('phone') || ''}</p>
             <p><strong>Beschrijving</strong>:</p>
-            <p>${formData.get('body') || ''}</p>`,
+            <p>${formData.get('body')?.replaceAll(/\r?\n/g, '<br>')}</p>`,
           },
         ],
         attachments: attachments,
@@ -64,16 +64,17 @@ export async function onRequestPost(context) {
     });
 
     if (res.ok) {
-      return new Response('OK');
+      return new Response('OK', {status: 202});
     } else {
-      return new Response('http error');
+      console.error(await res?.json());
+      return new Response('http error', {status: 500});
     }
   } catch(e) {
     console.error(e.message);
-    return new Response('error');
+    return new Response('error', {status: 500});
   }
 }
 
 export function onRequestGet(context) {
-  return new Response("Method not allowed")
+  return new Response("Method not allowed", {status: 405})
 }
