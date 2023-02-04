@@ -15,7 +15,7 @@
     <div class="flex justify-between">
       <div class="w-1/2">
         <a href="/" title="Mya Ink">
-          <picture>
+          <picture style="max-width: 300px; max-height: 297px; min-width: 189px; min-height: 208px;">
             <source srcset="./myaink.webp" type="image/webp">
             <source srcset="./myaink.png" type="image/png"> 
             <img src="./myaink.png" alt="Mya Ink - Tattooshop Woerden">

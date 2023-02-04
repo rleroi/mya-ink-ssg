@@ -1,4 +1,6 @@
 import { createApp } from './app'
+// workaround to include favicon in production bundle
+import logoUrl from './favicon.png'
 
 export { render }
 
