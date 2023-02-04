@@ -1,4 +1,5 @@
-@import url(https://fonts.bunny.net/css?family=abhaya-libre:400|inter:400,500,600,700,800,900);
+/* @import url(https://fonts.bunny.net/css?family=abhaya-libre:400|inter:400,500,600,700,800,900); */
+@import url(./fonts.css);
 
 @tailwind base;
 @tailwind components;
