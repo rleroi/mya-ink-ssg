@@ -50,7 +50,7 @@ const state = reactive({
   }
 });
 
-function sendMail() {
+async function sendMail() {
   let formData = new FormData();
   for(const [key, value] of Object.entries(state.mail)) {
     if (value) {
@@ -59,14 +59,19 @@ function sendMail() {
   }
 
   try {
-    fetch('/api/contact', {
+    res = await fetch('/api/contact', {
       method: 'POST',
       body: formData,
     });
 
+    if (!res.ok) {
+      throw new Error(await res?.text());
+    }
+
     for(const [key, value] of Object.entries(state.mail)) {
       state.mail[key] = null;
     }
+
     form.value.reset();
     state.sent = true;
   } catch(e) {
