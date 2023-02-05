@@ -1,7 +1,7 @@
 import { RenderErrorPage } from "vite-plugin-ssr";
 import { fetchPages, getPageBySlug, state, toPageResource } from "../../server/contentful";
 
-const pageSlug = 'contact'
+const pageSlug = 'portfolio'
 
 // dev
 export async function onBeforeRender(pageContext) {

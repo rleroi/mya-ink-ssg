@@ -13,8 +13,8 @@ async function render(pageContext) {
 
   // See https://vite-plugin-ssr.com/head
   const { documentProps } = pageContext.exports
-  const title = (documentProps && documentProps.title) || 'ITBazen.com – Backend Engineer'
-  const desc = (documentProps && documentProps.description) || 'ITBazen.com – Backend Engineer'
+  const title = (documentProps && documentProps.title) || 'Mya-Ink.nl – Tattooshop Woerden'
+  const desc = (documentProps && documentProps.description) || 'Mya-Ink.nl – Tattooshop Woerden'
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">
@@ -24,7 +24,6 @@ async function render(pageContext) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${desc}" />
         <title>${title}</title>
-        <script src="https://tarptaeya.github.io/repo-card/repo-card.js"></script>
       </head>
       <body>
         <div id="app">${dangerouslySkipEscape(appHtml)}</div>
