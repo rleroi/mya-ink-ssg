@@ -8,9 +8,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: 'rgba(94,77,108,255)',
-        secondary: 'rgb(138,129,144)',
-        accent: 'rgb(198,215,81)',
+        light: '#2C2C2C',
+        dark: '#1E1E1E',
+        border: '#444444',
+        laravel: '#FD4F31',
       },
     },
   },

@@ -6,18 +6,24 @@
 @tailwind utilities;
 
 html, body {
- font-family: 'Inter', sans-serif;
- font-size: 18px;
-}
-
-.title {
-    font-family: 'Abhaya Libre', serif;
+    @apply bg-light text-white;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
 }
 
 p {
-    @apply mb-4
+    @apply mb-4;
 }
 
 ul {
-    @apply list-disc ml-6
+    @apply list-disc ml-6;
+}
+
+.container {
+    @apply w-auto max-w-screen-xl xl:mx-auto;
+    @apply px-8 md:px-16;
+}
+
+input, textarea {
+    @apply bg-light border border-border rounded-sm;
 }

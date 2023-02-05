@@ -1,5 +1,5 @@
 <template>
-    <h3 v-if="page.title" class="title text-4xl mb-16">{{page.title}}</h3>
+    <h3 v-if="page.title" class="font-thin text-4xl mb-8">{{page.title}}</h3>
     <div v-html="page.html"></div>
 </template>
 <script>
