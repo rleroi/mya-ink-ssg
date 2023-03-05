@@ -28,20 +28,21 @@ export async function onBeforeRender(pageContext) {
 
 // prod/build
 export async function prerender() {
-    await fetchPages();
-    console.log();
-    return state.pages?.items?.map(page => {
-        return {
-            // Beacuse we already provide the `pageContext`, vite-plugin-ssr will *not* call
-            // the `onBeforeRender()` hook for `url`.
-            pageContext: {
-                pageProps: {
-                    page: toPageResource(page),
-                },
+    if (!state.pages) {
+        await fetchPages();
+    }
+
+    
+    return [{
+        // Beacuse we already provide the `pageContext`, vite-plugin-ssr will *not* call
+        // the `onBeforeRender()` hook for `url`.
+        pageContext: {
+            pageProps: {
+                page: toPageResource(getPageBySlug(pageSlug)),
             },
-            url: `/${pageSlug}`,
-        }
-    }) || [];
+        },
+        url: `/`,
+    }];
 }
 
 export const passToClient = ['pageProps'];

@@ -13,8 +13,8 @@ export async function onBeforeRender(pageContext) {
 
     if (!page) {
         console.log('should render 404 for', pageSlug);
-        
-        throw RenderErrorPage({pageContext: {}});
+
+        throw RenderErrorPage({ pageContext: {} });
     }
 
     return {
@@ -28,9 +28,11 @@ export async function onBeforeRender(pageContext) {
 
 // prod/build
 export async function prerender() {
-    await fetchPages();
-    console.log();
-    return state.pages?.items?.map(page => {
+    if (!state.pages) {
+        await fetchPages();
+    }
+
+    return state.pages?.items?.filter(item => !['index', 'afspraak', 'portfolio'].includes(item.fields.slug))?.map(page => {
         return {
             // Beacuse we already provide the `pageContext`, vite-plugin-ssr will *not* call
             // the `onBeforeRender()` hook for `url`.
