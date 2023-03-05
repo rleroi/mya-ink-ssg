@@ -24,6 +24,23 @@ async function render(pageContext) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${desc}" />
         <title>${title}</title>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1CCNVPL8M"></script>
+        <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-J1CCNVPL8M');</script>
+        <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "TattooParlor",
+            "url": "https://mya-ink.nl",
+            "logo": "https://mya-ink.nl/myaink.png",
+            "image": "https://mya-ink.nl/myaink.png",
+            "name": "Mya Ink",
+            "priceRange": "$$",
+            "currenciesAccepted": "EUR",
+            "paymentAccepted":"Cash, Debit Card",
+            "telephone": "0348 754 071",
+            "address": "Molenvlietbrink 248, 3448 HS Woerden"
+          }
+        </script>
       </head>
       <body>
         <div id="app">${dangerouslySkipEscape(appHtml)}</div>
