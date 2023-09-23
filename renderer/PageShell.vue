@@ -33,8 +33,8 @@
       </button>
     </div>
     <div class="mt-32"><slot /></div>
-    <div class="flex mt-32 justify-between">
-      <div class="flex flex-col mr-4">
+    <div class="flex mt-32 justify-between flex-col sm:flex-row">
+      <div class="flex flex-col mr-4 mb-4 sm:mb-0">
         <strong>Mya Ink</strong>
         <span>Molenvlietbrink 248</span>
         <span>3448 HS Woerden</span>

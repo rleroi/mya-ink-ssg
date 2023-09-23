@@ -6,7 +6,7 @@
     <div id="curator-feed-insta-layout"><a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a></div>
   </div>
   <div class="mt-8 text-center">
-    <a class="bg-primary px-8 py-4 text-white" href="https://www.instagram.com/mya_ink/" title="Volg @mya_ink op Instagram" target="_blank" rel="noreferer noopener">
+    <a class="bg-primary px-8 py-4 text-white inline-block" href="https://www.instagram.com/mya_ink/" title="Volg @mya_ink op Instagram" target="_blank" rel="noreferer noopener">
       Meer bekijken op Instagram
     </a>
   </div>
