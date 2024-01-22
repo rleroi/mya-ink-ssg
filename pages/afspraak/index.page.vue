@@ -59,7 +59,7 @@ async function sendMail() {
   }
 
   try {
-    res = await fetch('/api/contact', {
+    const res = await fetch('/api/contact', {
       method: 'POST',
       body: formData,
     });
