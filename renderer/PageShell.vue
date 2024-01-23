@@ -32,12 +32,12 @@
     </Sidebar>
 
     <div class="flex justify-between items-center relative">
-      <div class="w-1/3">
+      <div class="w-1/2 sm:w-1/3">
         <a href="/" title="Mya Ink">
           <img class="w-[287px]" src="./myaink.png" alt="Mya Ink - Tattooshop Woerden">
         </a>
       </div>
-      <div class="w-2/3 justify-end hidden lg:flex items-center">
+      <div class="w-1/2 sm:w-2/3 justify-end hidden lg:flex items-center">
         <Link href="/portfolio">Portfolio</Link>
         <Link href="/faq">FAQ</Link>
         <Link href="/risicos">Risico's</Link>
