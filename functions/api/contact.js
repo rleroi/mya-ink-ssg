@@ -50,6 +50,7 @@ export async function onRequestPost(context) {
             value: `<p><strong>Van</strong>: ${formData.get('name')}</p>
             <p><strong>Email</strong>: ${formData.get('address')}</p>
             <p><strong>Tel</strong>: ${formData.get('phone') || ''}</p>
+            <p><strong>Dagen</strong>: ${formData.get('days') || ''}</p>
             <p><strong>Beschrijving</strong>:</p>
             <p>${formData.get('body')?.replaceAll(/\r?\n/g, '<br>')}</p>`,
           },

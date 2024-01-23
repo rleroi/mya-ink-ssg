@@ -1,23 +1,40 @@
-/* @import url(https://fonts.bunny.net/css?family=abhaya-libre:400|inter:400,500,600,700,800,900); */
-@import url(./fonts.css);
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Inter:wght@300;500;700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer tailwind-base, custom, primevue, tailwind-utilities;
 
-html, body {
- font-family: 'Inter', sans-serif;
- font-size: 18px;
+@layer tailwind-base {
+    @tailwind base;
 }
 
-.title {
-    font-family: 'Abhaya Libre', serif;
+@layer custom {
+    html, body {
+        font-family: 'Inter', sans-serif;
+        line-height: 28px;
+        font-weight: 300;
+    }
+
+    b {
+        font-weight: 500;
+    }
+
+    .title {
+        font-family: 'Abhaya Libre', serif;
+    }
+
+    p {
+        @apply mb-4
+    }
+
+    ul {
+        @apply list-disc ml-6
+    }
+
+    a {
+        @apply text-primary fill-primary hover:text-secondary hover:fill-secondary;
+    }
 }
 
-p {
-    @apply mb-4
-}
-
-ul {
-    @apply list-disc ml-6
+@layer tailwind-utilities {
+    @tailwind components;
+    @tailwind utilities;
 }

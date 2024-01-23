@@ -1,7 +1,11 @@
 import { createSSRApp, h } from 'vue'
+import PrimeVue from 'primevue/config'
+import ToastService from 'primevue/toastservice';
 import PageShell from './PageShell.vue'
 import { setPageContext } from './usePageContext'
-import * as tailwind from './tailwind.css'
+import './tailwind.css'
+import './primevue-theme.css'
+import 'primeicons/primeicons.css'
 
 export { createApp }
 
@@ -25,6 +29,9 @@ function createApp(pageContext) {
 
   // We make `pageContext` available from any Vue component
   setPageContext(app, pageContext)
+
+  app.use(PrimeVue);
+  app.use(ToastService);
 
   return app
 }
