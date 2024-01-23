@@ -32,9 +32,9 @@
           <div class="mb-8">
             <label for="file">
               <input multiple ref="file" class="hidden" type="file" id="file"
-                     @change="state.mail.file = $event.target.files?.[0]" accept="image/*"/>
+                     @change="state.file = $event.target.files?.[0]" accept="image/*"/>
               <Button @click="addFile" class="w-full flex justify-center bg-white" outlined>
-                <span>{{ state.mail.file ? state.mail.file.name : 'Afbeelding toevoegen' }}</span>
+                <span>{{ state.file ? state.file.name : 'Afbeelding toevoegen' }}</span>
                 <i class="pi pi-image w-6 ml-2"/>
               </Button>
             </label>
@@ -80,6 +80,7 @@ const toast = useToast();
 
 const state = reactive({
   days: [],
+  file: null,
   isDirty: {
     name: false,
     address: false,
@@ -90,10 +91,17 @@ const state = reactive({
     address: null,
     phone: null,
     body: null,
-    file: null,
-    days: null,
   }
 });
+
+async function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (e) => reject(e);
+  })
+}
 
 function addFile() {
   file.value.click();
@@ -114,14 +122,19 @@ async function sendMail() {
   }
 
   let formData = new FormData();
+
+  if (state.days.length) {
+    formData.append('days', state.days.join(', '));
+  }
+  if (state.file) {
+    formData.append('file', (await getBase64(state.file)).split('base64,').pop());
+    formData.append('fileName',state.file?.name);
+  }
+
   for (const [key, value] of Object.entries(state.mail)) {
     if (value) {
       formData.append(key, value);
     }
-  }
-
-  if (state.days.length) {
-    formData.append('days', state.days.join(', '));
   }
 
   try {

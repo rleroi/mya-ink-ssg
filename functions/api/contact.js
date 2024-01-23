@@ -1,20 +1,15 @@
-async function toBase64(file) {
-  const arrayBuffer = await file.arrayBuffer();
-
-  return btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer))); 
-}
-
 export async function onRequestPost(context) {
   const formData = await context.request.formData();
 
   let attachments = null;
 
-  if (formData.get('file')?.size) {
-    const fileAsBase64 = await toBase64(formData.get('file'));
+  const file = formData.get('file');
+  const fileName = formData.get('fileName') || 'attachment.jpg';
+  if (file) {
     attachments = [
       {
-        content: fileAsBase64,
-        filename: formData.get('file')?.name,
+        content: file,
+        filename: fileName,
         disposition: 'attachment',
       },
     ];
@@ -79,3 +74,4 @@ export async function onRequestPost(context) {
 export function onRequestGet(context) {
   return new Response("Method not allowed", {status: 405})
 }
+
