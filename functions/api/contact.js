@@ -26,7 +26,7 @@ export async function onRequestPost(context) {
     // Basic email fields - use simple format for Mailgun
     mailgunFormData.append('from', context.env.CONTACT_EMAIL_FROM);
     mailgunFormData.append('to', context.env.CONTACT_EMAIL_TO);
-    mailgunFormData.append('reply-to', formData.get('address'));
+    mailgunFormData.append('h:Reply-To', formData.get('address'));
     mailgunFormData.append('subject', 'Mya Ink Contactformulier');
 
     // HTML content
