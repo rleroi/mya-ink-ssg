@@ -23,12 +23,12 @@ export async function onRequestPost(context) {
     // Create form data for Mailgun
     const mailgunFormData = new FormData();
     
-    // Basic email fields
-    mailgunFormData.append('from', `${context.env.CONTACT_EMAIL_FROM_NAME} <${context.env.CONTACT_EMAIL_FROM}>`);
-    mailgunFormData.append('to', `${context.env.CONTACT_EMAIL_TO_NAME} <${context.env.CONTACT_EMAIL_TO}>`);
-    mailgunFormData.append('reply-to', `${formData.get('name')} <${formData.get('address')}>`);
+    // Basic email fields - use simple format for Mailgun
+    mailgunFormData.append('from', context.env.CONTACT_EMAIL_FROM);
+    mailgunFormData.append('to', context.env.CONTACT_EMAIL_TO);
+    mailgunFormData.append('reply-to', formData.get('address'));
     mailgunFormData.append('subject', 'Mya Ink Contactformulier');
-    
+
     // HTML content
     const htmlContent = `<p><strong>Van</strong>: ${formData.get('name')}</p>
     <p><strong>Email</strong>: ${formData.get('address')}</p>
@@ -41,8 +41,13 @@ export async function onRequestPost(context) {
     
     // Add attachment if present
     if (file) {
-      // Convert base64 to blob for attachment
-      const fileBlob = new Blob([Buffer.from(file, 'base64')], { type: 'image/jpeg' });
+      // Convert base64 to Uint8Array for Cloudflare Workers
+      const binaryString = atob(file);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      const fileBlob = new Blob([bytes], { type: 'image/jpeg' });
       mailgunFormData.append('attachment', fileBlob, fileName);
     }
 
@@ -55,6 +60,8 @@ export async function onRequestPost(context) {
     });
 
     if (res.ok) {
+      const responseText = await res.text();
+      console.log('Mailgun success response:', responseText);
       return new Response('OK', {status: 202});
     } else {
       const errorData = await res.text();
