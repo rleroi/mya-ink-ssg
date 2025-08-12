@@ -17,52 +17,48 @@ export async function onRequestPost(context) {
 
   let res = null;
   try {
-    res = await fetch('https://api.sendgrid.com/v3/mail/send', {
+    // Mailgun API endpoint - replace YOUR_DOMAIN with your actual Mailgun domain
+    const mailgunUrl = `https://api.mailgun.net/v3/${context.env.MAILGUN_DOMAIN}/messages`;
+    
+    // Create form data for Mailgun
+    const mailgunFormData = new FormData();
+    
+    // Basic email fields
+    mailgunFormData.append('from', `${context.env.CONTACT_EMAIL_FROM_NAME} <${context.env.CONTACT_EMAIL_FROM}>`);
+    mailgunFormData.append('to', `${context.env.CONTACT_EMAIL_TO_NAME} <${context.env.CONTACT_EMAIL_TO}>`);
+    mailgunFormData.append('reply-to', `${formData.get('name')} <${formData.get('address')}>`);
+    mailgunFormData.append('subject', 'Mya Ink Contactformulier');
+    
+    // HTML content
+    const htmlContent = `<p><strong>Van</strong>: ${formData.get('name')}</p>
+    <p><strong>Email</strong>: ${formData.get('address')}</p>
+    <p><strong>Tel</strong>: ${formData.get('phone') || ''}</p>
+    <p><strong>Dagen</strong>: ${formData.get('days') || ''}</p>
+    <p><strong>Beschrijving</strong>:</p>
+    <p>${formData.get('body')?.replaceAll(/\r?\n/g, '<br>')}</p>`;
+    
+    mailgunFormData.append('html', htmlContent);
+    
+    // Add attachment if present
+    if (file) {
+      // Convert base64 to blob for attachment
+      const fileBlob = new Blob([Buffer.from(file, 'base64')], { type: 'image/jpeg' });
+      mailgunFormData.append('attachment', fileBlob, fileName);
+    }
+
+    res = await fetch(mailgunUrl, {
       method: 'POST',
-      body: JSON.stringify({
-        personalizations: [
-          {
-            to: [
-              {
-                email: context.env.CONTACT_EMAIL_TO,
-                name: 'Mya Ink',
-              },
-            ],
-          },
-        ],
-        from: {
-          email: context.env.CONTACT_EMAIL_FROM,
-          name: 'Mya Ink Contactformulier',
-        },
-        reply_to: {
-          email: formData.get('address'),
-          name: formData.get('name'),
-        },
-        subject: 'Mya Ink Contactformulier',
-        content: [
-          {
-            type: 'text/html',
-            value: `<p><strong>Van</strong>: ${formData.get('name')}</p>
-            <p><strong>Email</strong>: ${formData.get('address')}</p>
-            <p><strong>Tel</strong>: ${formData.get('phone') || ''}</p>
-            <p><strong>Dagen</strong>: ${formData.get('days') || ''}</p>
-            <p><strong>Beschrijving</strong>:</p>
-            <p>${formData.get('body')?.replaceAll(/\r?\n/g, '<br>')}</p>`,
-          },
-        ],
-        attachments: attachments,
-      }),
+      body: mailgunFormData,
       headers: {
-        'Authorization': 'Bearer ' + context.env.SENDGRID_API_KEY,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Authorization': 'Basic ' + btoa('api:' + context.env.MAILGUN_API_KEY),
       }
     });
 
     if (res.ok) {
       return new Response('OK', {status: 202});
     } else {
-      console.error(await res?.json());
+      const errorData = await res.text();
+      console.error('Mailgun error:', errorData);
       return new Response('http error', {status: 500});
     }
   } catch(e) {
