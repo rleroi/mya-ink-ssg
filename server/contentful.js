@@ -17,6 +17,16 @@ export async function fetchPages() {
     });
 }
 
+export async function fetchSlideshow(id) {
+  state.slideshow = await client.getEntry({
+    content_type: 'slideshow',
+  });
+}
+
+export async function getSlideshow(id) {
+  return state.slideshow;
+}
+
 export function getPageBySlug(slug) {
   return state.pages?.items?.find(page => page.fields.slug === slug);
 }

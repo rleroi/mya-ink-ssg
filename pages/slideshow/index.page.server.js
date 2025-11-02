@@ -1,26 +1,27 @@
-import { RenderErrorPage } from "vite-plugin-ssr";
-import { fetchPages, getPageBySlug, state, toPageResource } from "../../server/contentful";
+import {RenderErrorPage} from "vite-plugin-ssr";
+import {fetchSlideshow, getSlideshow, state} from "../../server/contentful";
 
-const pageSlug = 'portfolio'
+const pageSlug = 'slideshow'
+const id = process.env.SLIDESHOW_ID;
 
 // dev
 export async function onBeforeRender(pageContext) {
-    if (!state.pages) {
-        await fetchPages();
+    if (!state.slideshow) {
+        await fetchSlideshow(id);
     }
 
-    const page = getPageBySlug(pageSlug);
+    const slideshow = getSlideshow(id);
 
-    if (!page) {
+    if (!slideshow) {
         console.log('should render 404 for', pageSlug);
-        
+
         throw RenderErrorPage({pageContext: {}});
     }
 
     return {
         pageContext: {
             pageProps: {
-                page: toPageResource(page),
+                slideshow: slideshow,
             }
         }
     };
@@ -28,8 +29,8 @@ export async function onBeforeRender(pageContext) {
 
 // prod/build
 export async function prerender() {
-    if (!state.pages) {
-        await fetchPages();
+    if (!state.slideshow) {
+        await fetchSlideshow(id);
     }
 
     return [{
@@ -37,7 +38,7 @@ export async function prerender() {
         // the `onBeforeRender()` hook for `url`.
         pageContext: {
             pageProps: {
-                page: toPageResource(getPageBySlug(pageSlug)),
+                slideshow: getSlideshow(id),
             },
         },
         url: `/${pageSlug}`,
