@@ -21,7 +21,8 @@
     "sirv": "^2.0.2",
     "vite": "^3.0.9",
     "vite-plugin-ssr": "^0.4.62",
-    "vue": "^3.2.33"
+    "vue": "^3.2.33",
+    "vue-flux": "^7.0.0-beta.6"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

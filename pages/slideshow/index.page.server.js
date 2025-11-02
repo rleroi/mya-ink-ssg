@@ -1,5 +1,5 @@
 import {RenderErrorPage} from "vite-plugin-ssr";
-import {fetchSlideshow, getSlideshow, state} from "../../server/contentful";
+import {fetchSlideshow, getSlideshow, state, toSlideshowResource} from "../../server/contentful";
 
 const pageSlug = 'slideshow'
 const id = process.env.SLIDESHOW_ID;
@@ -21,7 +21,7 @@ export async function onBeforeRender(pageContext) {
     return {
         pageContext: {
             pageProps: {
-                slideshow: slideshow,
+                slideshow: toSlideshowResource(slideshow),
             }
         }
     };
@@ -38,7 +38,7 @@ export async function prerender() {
         // the `onBeforeRender()` hook for `url`.
         pageContext: {
             pageProps: {
-                slideshow: getSlideshow(id),
+                slideshow: toSlideshowResource(getSlideshow(id)),
             },
         },
         url: `/${pageSlug}`,

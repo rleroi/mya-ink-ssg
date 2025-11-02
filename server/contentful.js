@@ -18,13 +18,56 @@ export async function fetchPages() {
 }
 
 export async function fetchSlideshow(id) {
-  state.slideshow = await client.getEntry({
-    content_type: 'slideshow',
-  });
+  const entry = await client.getEntry(id, { include: 10 });
+  state.slideshow = entry;
+  return entry;
 }
 
-export async function getSlideshow(id) {
+export function getSlideshow(id) {
   return state.slideshow;
+}
+
+export function toSlideshowResource(slideshow) {
+  if (!slideshow || !slideshow.fields) {
+    return { images: [] };
+  }
+  
+  // Extract images from slideshow fields
+  const imagesField = slideshow.fields.images;
+  
+  const images = imagesField.map((asset) => {
+    // Handle Contentful asset references (can be linked entries or direct references)
+    // If it's a linked entry, resolve it from includes
+    let assetData = asset;
+    
+    // Check if it's a sys reference (linked entry)
+    if (asset.sys && asset.sys.type === 'Link') {
+      // Find the asset in includes
+      const includes = slideshow.includes || {};
+      const assets = includes.Asset || [];
+      assetData = assets.find(a => a.sys.id === asset.sys.id) || asset;
+    }
+    
+    // Extract file URL from Contentful asset structure
+    const file = assetData.fields?.file || assetData;
+    const url = file.url || file.fields?.url;
+    
+    if (!url) {
+      return null;
+    }
+    
+    // Ensure URL has protocol
+    const fullUrl = url.startsWith('//') ? `https:${url}` : url.startsWith('http') ? url : `https:${url}`;
+    
+    return {
+      url: fullUrl,
+      title: assetData.fields?.title || assetData.title || '',
+    };
+  }).filter((img) => img && img.url); // Filter out any invalid entries
+  
+  return {
+    images: images,
+  };
 }
 
 export function getPageBySlug(slug) {

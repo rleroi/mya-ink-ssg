@@ -10,9 +10,17 @@ import 'primeicons/primeicons.css'
 export { createApp }
 
 function createApp(pageContext) {
-  const { Page, pageProps } = pageContext
+  const { Page, pageProps, urlPathname } = pageContext
+  
+  // Skip PageShell for slideshow page
+  const skipPageShell = urlPathname === '/slideshow'
+  
   const PageWithLayout = {
     render() {
+      if (skipPageShell) {
+        return h(Page, pageProps || {})
+      }
+      
       return h(
         PageShell,
         {},
