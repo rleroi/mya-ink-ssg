@@ -39,7 +39,7 @@
       </nav>
       <div class="mt-auto pt-10 flex flex-col gap-1 text-[15px] leading-[1.7] text-fog">
         <span>Molenvlietbrink 248, Woerden</span>
-        <a class="text-paper hover:text-lilac" href="tel:0348754071">0348 754 071</a>
+        <a class="text-paper hover:text-lilac" href="tel:+31348754071">0348 754 071</a>
         <a class="text-paper hover:text-lilac" href="https://www.instagram.com/mya_ink/" target="_blank" rel="noreferrer noopener">@mya_ink</a>
       </div>
     </div>
@@ -62,7 +62,7 @@
           <div class="flex flex-col">
             <span class="eyebrow mb-3">Contact</span>
             <a href="mailto:info@mya-ink.nl">info@mya-ink.nl</a>
-            <a href="tel:0348754071">0348 754 071</a>
+            <a href="tel:+31348754071">0348 754 071</a>
             <a href="https://www.instagram.com/mya_ink/" target="_blank" rel="noreferrer noopener">@mya_ink</a>
           </div>
           <div class="flex flex-col w-full max-w-[240px] md:max-w-none">

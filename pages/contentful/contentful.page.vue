@@ -14,7 +14,7 @@
       <p class="m-0 font-display text-[34px] md:text-[40px] leading-[1.1]">Nog <span class="italic">vragen?</span></p>
       <div class="flex flex-col md:flex-row md:flex-wrap md:gap-6 md:items-center text-[15px] leading-[1.9]">
         <a href="mailto:info@mya-ink.nl" class="text-paper hover:text-lilac">info@mya-ink.nl</a>
-        <a href="tel:0348754071" class="text-paper hover:text-lilac">0348 754 071</a>
+        <a href="tel:+31348754071" class="text-paper hover:text-lilac">0348 754 071</a>
       </div>
     </div>
   </section>

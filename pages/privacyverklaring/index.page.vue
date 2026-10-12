@@ -14,7 +14,7 @@
           Mya Ink<br>
           Molenvlietbrink 248, 3448 HS Woerden<br>
           KVK 72358297<br>
-          <a href="mailto:info@mya-ink.nl">info@mya-ink.nl</a> · <a href="tel:0348754071">0348 754 071</a>
+          <a href="mailto:info@mya-ink.nl">info@mya-ink.nl</a> · <a href="tel:+31348754071">0348 754 071</a>
         </p>
 
         <h2>Welke gegevens verwerk ik?</h2>
