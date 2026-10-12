@@ -139,6 +139,18 @@
     }
 }
 
+/* Bodoni Moda kiest bij grote letters automatisch de optische maat 96, met haarlijntjes
+   die op telefoons bijna wegvallen. Een lagere optische maat geeft stevigere dunne lijnen. */
+.font-display, .display, .h2, .rt h1, .rt h2, .rt h3 {
+    font-variation-settings: "opsz" 28;
+}
+
+@media (min-width: 768px) {
+    .font-display, .display, .h2, .rt h1, .rt h2, .rt h3 {
+        font-variation-settings: "opsz" 48;
+    }
+}
+
 /* Zachte overgang tussen pagina's (browsers die het ondersteunen) */
 @view-transition {
     navigation: auto;
