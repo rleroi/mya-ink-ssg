@@ -4,7 +4,7 @@
     <div class="contents md:flex md:flex-[1_1_480px] md:min-w-0 md:flex-col md:gap-8">
       <p class="eyebrow order-1">Tattoostudio · Woerden</p>
       <h1 class="order-2 display m-0 text-[48px] md:text-[clamp(56px,8vw,108px)] leading-[.95] tracking-[-.02em]">Tattoos op maat,<br><span class="italic text-plum">met aandacht</span> gezet.</h1>
-      <div v-if="intro" class="order-4 intro max-w-[440px] text-base md:text-lg leading-[1.6] text-body" v-html="intro"></div>
+      <p class="order-4 m-0 max-w-[440px] text-base md:text-lg leading-[1.6] text-body">Unieke tattoos op maat, met veel oog voor detail, in een private studio in Woerden.</p>
       <div class="order-5 flex flex-wrap gap-4">
         <a class="btn btn-dark hidden lg:inline-flex" href="/afspraak">Maak een afspraak</a>
         <a class="btn btn-line w-full sm:w-auto" href="/portfolio">Bekijk portfolio</a>
@@ -25,7 +25,7 @@
       <div class="flex-[1_1_420px] min-w-0 flex flex-col gap-5 md:gap-6">
         <p class="eyebrow">Over de studio</p>
         <h2 class="h2">Eén artiest, één stoel,<br class="hidden md:inline"> <span class="italic">alle aandacht</span> voor jou.</h2>
-        <div v-if="about" class="rt max-w-[520px] !text-base md:!text-[17px] !leading-[1.7] !text-body" v-html="about"></div>
+        <div v-if="page.html" class="rt about max-w-[520px] !text-base md:!text-[17px] !leading-[1.7] !text-body" v-html="page.html"></div>
         <a href="/faq" class="link-arrow min-h-[44px] flex items-center">Lees de veelgestelde vragen →</a>
       </div>
     </div>
@@ -102,9 +102,7 @@
 </script>
 
 <script setup>
-import {computed} from 'vue';
-
-const props = defineProps(['page']);
+defineProps(['page']);
 
 // Vaste selectie; het volledige (Instagram-)portfolio staat op /portfolio
 const recentWork = [
@@ -113,21 +111,6 @@ const recentWork = [
   {src: 'werk-3', alt: 'Tattoo met zonnebloem, paard en Romeinse cijfers'},
   {src: 'werk-4', alt: 'Fineline anker tattoo'},
 ];
-
-// Eerste alinea uit Contentful = intro in de hero, de rest = "Over de studio"
-const parts = computed(() => {
-  const html = props.page?.html || '';
-  const end = html.indexOf('</p>');
-
-  if (!html.startsWith('<p>') || end === -1) {
-    return {intro: '', about: html};
-  }
-
-  return {intro: html.slice(0, end + 4), about: html.slice(end + 4)};
-});
-
-const intro = computed(() => parts.value.intro);
-const about = computed(() => parts.value.about);
 
 const steps = [
   {title: 'Aanvraag', text: 'Vertel via het formulier wat je wilt: idee, plek op het lichaam, grootte in cm en een paar voorbeelden.'},
@@ -143,8 +126,8 @@ const reviews = [
 </script>
 
 <style scoped>
-.intro :deep(p) {
-  @apply m-0;
+.about :deep(p:first-child) {
+  @apply text-base md:text-[17px] text-body;
 }
 
 .stage {

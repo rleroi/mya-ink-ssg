@@ -9,6 +9,7 @@
       </div>
       <img src="/images/studio-stoel-800.webp" srcset="/images/studio-stoel-800.webp 800w, /images/studio-stoel-1600.webp 1600w" sizes="520px" width="1600" height="1067" alt="De studio, met planten en de tattoostoel" loading="lazy"
            class="order-2 block w-full lg:max-w-[520px] h-[200px] lg:h-[300px] object-cover rounded lg:mt-2">
+      <div v-if="page.html" class="order-2 info max-w-[520px] text-[15px] leading-[1.7] text-body" v-html="page.html"></div>
       <div class="order-4 flex flex-col lg:max-w-[460px] mt-4 max-lg:bg-white max-lg:-mx-5 max-lg:px-5 max-lg:py-10">
         <p class="eyebrow mb-2">Na je aanvraag</p>
         <div v-for="(item, i) in after" :key="item.title" class="flex gap-4 lg:gap-5 py-4 lg:py-5 border-t border-line last:border-b">
@@ -270,6 +271,18 @@ async function sendMail() {
 </script>
 
 <style scoped>
+.info :deep(p) {
+  @apply m-0 mb-3;
+}
+
+.info :deep(p:last-child) {
+  @apply mb-0;
+}
+
+.info :deep(a) {
+  @apply underline underline-offset-4;
+}
+
 .field {
   @apply flex flex-col gap-2;
 }
