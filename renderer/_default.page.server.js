@@ -4,7 +4,7 @@ import { createApp } from './app'
 import logoUrl from './favicon.png'
 import { business, getSeo, SITE_URL } from './seo'
 
-const FONTS_URL = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Manrope:wght@400;500;600&display=swap'
+const FONTS_URL = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Manrope:wght@400;500;600&display=swap'
 
 // Prefetch internal pages on hover/touch, so the next page opens instantly
 const speculationRules = JSON.stringify({ prefetch: [{ source: 'document', where: { href_matches: '/*' }, eagerness: 'moderate' }] })
