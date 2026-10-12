@@ -1,36 +1,28 @@
 <template>
-  <a :class="{ active: pageContext.urlPathname === $attrs.href, cta: props.cta }">
+  <a :class="{ active: isActive, cta: props.cta, 'btn btn-dark': props.cta }" :aria-current="isActive ? 'page' : null">
     <slot/>
   </a>
 </template>
 <style scoped>
-a {
-  @apply pl-4;
+a:not(.cta) {
+  @apply no-underline text-[15px] tracking-[.02em];
 }
 
-a, a:hover {
-  @apply text-black;
-}
-
-a.active:not(.cta) {
-  @apply underline;
-}
-
-a:hover:not(.cta)
-{
-  @apply underline;
-}
-
-.cta {
-  @apply border border-primary/30 hover:bg-primary/10 bg-primary/5 transition-all duration-300 rounded-md ml-4 px-4 py-2;
+a.active:not(.cta),
+a:hover:not(.cta) {
+  @apply underline underline-offset-[6px];
 }
 </style>
 <script setup>
+import {computed, useAttrs} from 'vue';
 import {usePageContext} from './usePageContext'
 
 const pageContext = usePageContext()
+const attrs = useAttrs()
 
 const props = defineProps({
   cta: Boolean
 })
+
+const isActive = computed(() => pageContext.urlPathname === attrs.href)
 </script>

@@ -17,11 +17,14 @@ async function render(pageContext) {
   const desc = (documentProps && documentProps.description) || 'Mya-Ink.nl – Tattooshop Woerden'
 
   const documentHtml = escapeInject`<!DOCTYPE html>
-    <html lang="en">
+    <html lang="nl">
       <head>
         <meta charset="UTF-8" />
         <link rel="icon" href="${logoUrl}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#F5F4F1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <meta name="description" content="${desc}" />
         <title>${title}</title>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1CCNVPL8M"></script>

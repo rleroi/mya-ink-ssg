@@ -1,40 +1,160 @@
-@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Inter:wght@300;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Manrope:wght@400;500;600&display=swap');
 
-@layer tailwind-base, custom, primevue, tailwind-utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@layer tailwind-base {
-    @tailwind base;
-}
-
-@layer custom {
-    html, body {
-        font-family: 'Inter', sans-serif;
-        line-height: 28px;
-        font-weight: 300;
-    }
-
-    b {
-        font-weight: 500;
-    }
-
-    .title {
-        font-family: 'Abhaya Libre', serif;
-    }
-
-    p {
-        @apply mb-4
-    }
-
-    ul {
-        @apply list-disc ml-6
+@layer base {
+    html {
+        @apply bg-paper text-ink font-sans antialiased;
     }
 
     a {
-        @apply text-primary fill-primary hover:text-secondary hover:fill-secondary;
+        @apply text-ink transition-colors hover:text-plum;
+    }
+
+    :focus-visible {
+        @apply outline outline-2 outline-offset-2 outline-plum;
     }
 }
 
-@layer tailwind-utilities {
-    @tailwind components;
-    @tailwind utilities;
+@layer components {
+    .container-site {
+        @apply w-full max-w-site mx-auto px-5 md:px-10;
+    }
+
+    .eyebrow {
+        @apply m-0 text-xs md:text-[13px] tracking-[.18em] uppercase text-muted;
+    }
+
+    .display {
+        @apply font-display font-normal;
+    }
+
+    .h2 {
+        @apply m-0 font-display font-normal text-[38px] md:text-[52px] leading-[1.05];
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center gap-2.5 min-h-[48px] px-7 rounded-full text-[15px] font-medium tracking-[.02em] no-underline transition-colors cursor-pointer border-0;
+    }
+
+    .btn-dark {
+        @apply bg-ink text-paper hover:bg-plum hover:text-white;
+    }
+
+    .btn-line {
+        @apply border border-solid border-ink text-ink bg-transparent hover:bg-ink hover:text-paper;
+    }
+
+    .btn-light {
+        @apply bg-paper text-ink hover:bg-white hover:text-plum;
+    }
+
+    .link-arrow {
+        @apply text-[15px] underline underline-offset-[6px];
+    }
+
+    /* Rich text uit Contentful */
+    .rt {
+        @apply text-[17px] md:text-lg leading-[1.75] text-[#2B2927];
+    }
+
+    .rt > p:first-child {
+        @apply text-[19px] md:text-[21px] leading-[1.6] text-ink;
+    }
+
+    .rt h1, .rt h2, .rt h3 {
+        @apply font-display font-normal text-ink;
+    }
+
+    .rt h2 {
+        @apply text-[30px] md:text-4xl leading-[1.15] mt-14 mb-4;
+    }
+
+    .rt h3 {
+        @apply text-2xl leading-tight mt-10 mb-3;
+    }
+
+    .rt p {
+        @apply mb-5;
+    }
+
+    .rt ul, .rt ol {
+        @apply mb-5 pl-[22px];
+    }
+
+    .rt ul {
+        @apply list-disc;
+    }
+
+    .rt ol {
+        @apply list-decimal;
+    }
+
+    .rt li {
+        @apply mb-2;
+    }
+
+    .rt li > p {
+        @apply mb-0;
+    }
+
+    .rt li::marker {
+        @apply text-plum;
+    }
+
+    .rt a {
+        @apply underline underline-offset-4;
+    }
+
+    .rt blockquote {
+        @apply my-8 px-7 py-6 bg-paper rounded text-base;
+    }
+
+    .rt blockquote p:last-child {
+        @apply mb-0;
+    }
+
+    .rt hr {
+        @apply my-10 border-line;
+    }
+
+    .rt b, .rt strong {
+        @apply font-semibold;
+    }
+
+    /* Horizontaal swipen op mobiel */
+    .swipe {
+        @apply flex gap-3 overflow-x-auto snap-x snap-mandatory px-5 pb-1;
+        scrollbar-width: none;
+    }
+
+    .swipe::-webkit-scrollbar {
+        display: none;
+    }
+
+    .swipe > * {
+        @apply snap-start shrink-0 basis-[78%];
+    }
+}
+
+/* Scroll-reveal: alleen actief als JS draait (v-reveal zet .reveal) */
+.reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .8s ease, transform .8s ease;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }

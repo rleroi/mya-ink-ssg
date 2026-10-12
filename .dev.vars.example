@@ -1,0 +1,4 @@
+# Cloudflare Pages Functions (functions/api/contact.js); lokaal kopiëren naar .dev.vars
+RESEND_API_KEY=
+CONTACT_EMAIL_FROM=Mya Ink formulier <formulier@send.mya-ink.nl>
+CONTACT_EMAIL_TO=info@mya-ink.nl

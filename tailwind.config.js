@@ -8,9 +8,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: 'rgba(94,77,108,255)',
-        secondary: 'rgb(138,129,144)',
-        accent: 'rgb(198,215,81)',
+        ink: '#161514',
+        paper: '#F5F4F1',
+        plum: '#5E4D6C',
+        lilac: '#C9BBD6',
+        stone: '#E3DFD9',
+        line: '#D9D5CF',
+        muted: '#5F5B57',
+        body: '#3F3C39',
+        fog: '#CFCAC3',
+        danger: '#9B2C2C',
+      },
+      fontFamily: {
+        display: ['"Bodoni Moda"', 'Georgia', 'serif'],
+        sans: ['Manrope', 'system-ui', 'sans-serif'],
+      },
+      maxWidth: {
+        site: '1280px',
       },
     },
   },

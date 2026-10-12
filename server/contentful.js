@@ -15,6 +15,22 @@ export async function fetchPages() {
     state.pages = await client.getEntries({
       content_type: 'page',
     });
+
+    // Meldingsbalk wordt bij elke pagina getoond, dus meteen mee ophalen
+    await fetchMelding();
+}
+
+async function fetchMelding() {
+  try {
+    const result = await client.getEntries({
+      content_type: 'melding',
+      limit: 1,
+    });
+    state.melding = result.items?.[0] || null;
+  } catch (e) {
+    // Content type bestaat (nog) niet: geen balk
+    state.melding = null;
+  }
 }
 
 export async function fetchSlideshow(id) {
@@ -72,6 +88,14 @@ export function toSlideshowResource(slideshow) {
 
 export function getPageBySlug(slug) {
   return state.pages?.items?.find(page => page.fields.slug === slug);
+}
+
+// Site-brede meldingsbalk (bijv. vakantie): Contentful-type 'melding' met schakelaar 'actief' en 'tekst'.
+// Aanmaken: scripts/contentful-meldingsbalk.mjs
+export function getMelding() {
+  const fields = state.melding?.fields;
+
+  return fields?.actief && fields?.tekst ? fields.tekst : null;
 }
 
 export function toPageResource(page) {

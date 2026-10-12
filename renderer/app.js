@@ -1,32 +1,31 @@
 import { createSSRApp, h } from 'vue'
-import PrimeVue from 'primevue/config'
-import ToastService from 'primevue/toastservice';
 import PageShell from './PageShell.vue'
 import { setPageContext } from './usePageContext'
+import { reveal } from './reveal'
 import './tailwind.css'
-import './primevue-theme.css'
-import 'primeicons/primeicons.css'
 
 export { createApp }
 
 function createApp(pageContext) {
-  const { Page, pageProps, urlPathname } = pageContext
-  
+  const { Page, urlPathname } = pageContext
+  // `melding` is for PageShell (via pageContext), not a prop of the page itself
+  const { melding, ...pageProps } = pageContext.pageProps || {}
+
   // Skip PageShell for slideshow page
   const skipPageShell = urlPathname === '/slideshow'
-  
+
   const PageWithLayout = {
     render() {
       if (skipPageShell) {
-        return h(Page, pageProps || {})
+        return h(Page, pageProps)
       }
-      
+
       return h(
         PageShell,
         {},
         {
           default() {
-            return h(Page, pageProps || {})
+            return h(Page, pageProps)
           }
         }
       )
@@ -38,8 +37,7 @@ function createApp(pageContext) {
   // We make `pageContext` available from any Vue component
   setPageContext(app, pageContext)
 
-  app.use(PrimeVue);
-  app.use(ToastService);
+  app.directive('reveal', reveal);
 
   return app
 }

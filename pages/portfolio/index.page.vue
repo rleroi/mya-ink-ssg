@@ -1,22 +1,26 @@
 <template>
-  <h3 v-if="page.title" class="title text-4xl mb-16">{{page.title}}</h3>
-  <div v-html="page.html"></div>
+  <section class="container-site pt-6 md:pt-20 pb-10 md:pb-16 flex flex-wrap justify-between items-end gap-6 md:gap-8">
+    <div class="flex flex-col gap-4 md:gap-5">
+      <p class="eyebrow">Portfolio</p>
+      <h1 class="display m-0 text-[48px] md:text-[clamp(48px,7vw,96px)] leading-none">Gezet <span class="italic">met zorg</span></h1>
+    </div>
+    <p class="m-0 max-w-[420px] text-base md:text-[17px] leading-[1.7] text-body">Van fineline tot cover-ups en kleur. Alles wat op Instagram verschijnt, staat hier automatisch.</p>
+  </section>
 
-  <div class="mt-8" style="font-size: 10px">
-    <div id="curator-feed-insta-layout"><a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a></div>
-  </div>
-  <div class="mt-8 flex justify-center">
-    <a class="p-button p-component flex justify-center w-full md:w-[20rem]" href="https://www.instagram.com/mya_ink/" title="Volg @mya_ink op Instagram" target="_blank" rel="noreferer noopener">
-      <span>Bekijk meer op Instagram</span>
-      <svg class="w-6 ml-2" fill="#ffffff" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 169.063 169.063" xml:space="preserve">
-        <g>
-          <path d="M122.406,0H46.654C20.929,0,0,20.93,0,46.655v75.752c0,25.726,20.929,46.655,46.654,46.655h75.752   c25.727,0,46.656-20.93,46.656-46.655V46.655C169.063,20.93,148.133,0,122.406,0z M154.063,122.407   c0,17.455-14.201,31.655-31.656,31.655H46.654C29.2,154.063,15,139.862,15,122.407V46.655C15,29.201,29.2,15,46.654,15h75.752   c17.455,0,31.656,14.201,31.656,31.655V122.407z"/>
-          <path d="M84.531,40.97c-24.021,0-43.563,19.542-43.563,43.563c0,24.02,19.542,43.561,43.563,43.561s43.563-19.541,43.563-43.561   C128.094,60.512,108.552,40.97,84.531,40.97z M84.531,113.093c-15.749,0-28.563-12.812-28.563-28.561   c0-15.75,12.813-28.563,28.563-28.563s28.563,12.813,28.563,28.563C113.094,100.281,100.28,113.093,84.531,113.093z"/>
-          <path d="M129.921,28.251c-2.89,0-5.729,1.17-7.77,3.22c-2.051,2.04-3.23,4.88-3.23,7.78c0,2.891,1.18,5.73,3.23,7.78   c2.04,2.04,4.88,3.22,7.77,3.22c2.9,0,5.73-1.18,7.78-3.22c2.05-2.05,3.22-4.89,3.22-7.78c0-2.9-1.17-5.74-3.22-7.78   C135.661,29.421,132.821,28.251,129.921,28.251z"/>
-        </g>
-      </svg>
-    </a>
-  </div>
+  <section class="bg-white">
+    <div class="container-site pt-10 md:pt-20 pb-6 md:pb-14">
+      <!-- Curator.io-widget: toont automatisch de Instagram-posts van @mya_ink -->
+      <div class="curator">
+        <div id="curator-feed-insta-layout"><a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a></div>
+      </div>
+    </div>
+    <div class="container-site pb-14 md:pb-[120px] flex justify-center">
+      <a class="btn btn-line w-full sm:w-auto" href="https://www.instagram.com/mya_ink/" title="Volg @mya_ink op Instagram" target="_blank" rel="noreferrer noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>
+        Meer op Instagram
+      </a>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -26,6 +30,8 @@
 
 <script setup>
 import { onMounted } from 'vue';
+
+defineProps(['page']);
 
 onMounted(() => {
   if (!document.querySelector('#curator-script')) {
@@ -42,4 +48,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.curator {
+  font-size: 10px;
+}
 </style>
