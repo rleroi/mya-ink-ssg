@@ -1,0 +1,118 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link "Mya Ink" [ref=e5] [cursor=pointer]:
+      - /url: /
+    - navigation "Hoofdmenu" [ref=e6]:
+      - link "Portfolio" [ref=e7] [cursor=pointer]:
+        - /url: /portfolio
+      - link "FAQ" [ref=e8] [cursor=pointer]:
+        - /url: /faq
+      - link "Risico's" [ref=e9] [cursor=pointer]:
+        - /url: /risicos
+      - link "Nazorg" [ref=e10] [cursor=pointer]:
+        - /url: /nazorg
+      - link "Maak een afspraak" [ref=e11] [cursor=pointer]:
+        - /url: /afspraak
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]:
+          - paragraph [ref=e16]: Afspraak
+          - heading "Vertel me over je idee" [level=1] [ref=e17]
+          - paragraph [ref=e18]: Elke tattoo begint met een gesprek. Ik tatoeëer vanaf 18 jaar. Hoe meer je vertelt — plek, grootte in cm, stijl, voorbeelden — hoe beter het eerste voorstel.
+        - img "De studio, met planten en de tattoostoel" [ref=e19]
+        - generic [ref=e20]:
+          - paragraph [ref=e21]: Wil je een afspraak maken voor het zetten van een tattoo of wil je een tattoo bespreking inplannen? Voor een goede voorbereiding en om verrassingen te voorkomen, wordt aangeraden om eerst de FAQ en nazorgadvies op de website te lezen. Neem vervolgens contact op om je ideeën te bespreken via het volgende contactformulier.
+          - paragraph [ref=e22]:
+            - text: Of stuur een email naar
+            - link "info@mya-ink.nl" [ref=e23] [cursor=pointer]:
+              - /url: mailto:info@mya-ink.nl
+          - paragraph [ref=e24]: "Hier nog wat extra informatie over de locatie: Het is gratis parkeren bij Molenvliet. En er zijn winkels als de Kruidvat en Jumbo op 1 minuut loopafstand."
+        - generic [ref=e25]:
+          - paragraph [ref=e26]: Na je aanvraag
+          - generic [ref=e27]:
+            - generic [aria-hidden] [ref=e28]: "01"
+            - generic [ref=e29]:
+              - strong [ref=e30]: Reactie
+              - generic [ref=e31]: Je hoort binnen 3 werkdagen van me, met vragen of een eerste idee.
+          - generic [ref=e32]:
+            - generic [aria-hidden] [ref=e33]: "02"
+            - generic [ref=e34]:
+              - strong [ref=e35]: Afspraak & aanbetaling
+              - generic [ref=e36]: Wil je eerst langskomen voor een gesprek? Dat kan altijd. Bij het inplannen van de afspraak vraag ik een aanbetaling.
+          - generic [ref=e37]:
+            - generic [aria-hidden] [ref=e38]: "03"
+            - generic [ref=e39]:
+              - strong [ref=e40]: Op de dag zelf
+              - generic [ref=e41]: We nemen eerst samen het ontwerp en de plek door voordat ik begin.
+      - generic [ref=e43]:
+        - generic [ref=e44]:
+          - generic [ref=e45]:
+            - generic [ref=e46]: Naam *
+            - textbox "Naam *" [ref=e47]
+          - generic [ref=e48]:
+            - generic [ref=e49]: E-mailadres *
+            - textbox "E-mailadres *" [ref=e50]
+        - generic [ref=e51]:
+          - generic [ref=e52]: Telefoonnummer
+          - textbox "Telefoonnummer" [ref=e53]
+        - group "Beschikbare dagen" [ref=e54]:
+          - generic [ref=e56]:
+            - button "Dinsdag" [ref=e57] [cursor=pointer]
+            - button "Woensdag" [ref=e58] [cursor=pointer]
+            - button "Donderdag" [ref=e59] [cursor=pointer]
+            - button "Vrijdag" [ref=e60] [cursor=pointer]
+            - button "Zaterdag" [ref=e61] [cursor=pointer]
+        - generic [ref=e62]:
+          - generic [ref=e63]: Omschrijving van de tattoo *
+          - textbox "Omschrijving van de tattoo *" [ref=e64]
+          - generic [ref=e65]: Gewenste grootte in cm, lichaamsdeel, stijl.
+        - generic [ref=e66]:
+          - button "Voorbeeldfoto's toevoegen" [ref=e67]
+          - generic [ref=e68] [cursor=pointer]: Voorbeeldfoto's toevoegen
+          - generic [ref=e74]: Maximaal 5 foto's, bijvoorbeeld van je idee of de plek op je lichaam.
+        - generic [ref=e75] [cursor=pointer]:
+          - checkbox "Ik ben 18 jaar of ouder *" [ref=e76]
+          - text: Ik ben 18 jaar of ouder *
+        - paragraph [ref=e77]:
+          - text: Je gegevens gebruik ik alleen om je aanvraag te beantwoorden. Lees de
+          - link "privacyverklaring" [ref=e78] [cursor=pointer]:
+            - /url: /privacyverklaring
+          - text: .
+        - button "Verzenden" [ref=e79] [cursor=pointer]
+  - contentinfo [ref=e80]:
+    - generic [ref=e81]:
+      - generic [ref=e82]:
+        - img "Mya Ink" [ref=e83]
+        - generic [ref=e84]:
+          - generic [ref=e85]: Studio
+          - generic [ref=e86]: Molenvlietbrink 248
+          - generic [ref=e87]: 3448 HS Woerden
+          - link "Route in Google Maps" [ref=e88] [cursor=pointer]:
+            - /url: https://goo.gl/maps/MFzvyKoCisYjUH2C7
+        - generic [ref=e89]:
+          - generic [ref=e90]: Contact
+          - link "info@mya-ink.nl" [ref=e91] [cursor=pointer]:
+            - /url: mailto:info@mya-ink.nl
+          - link "0348 754 071" [ref=e92] [cursor=pointer]:
+            - /url: tel:0348754071
+          - link "@mya_ink" [ref=e93] [cursor=pointer]:
+            - /url: https://www.instagram.com/mya_ink/
+        - generic [ref=e94]:
+          - generic [ref=e95]: Openingstijden
+          - generic [ref=e96]:
+            - generic [ref=e97]: Di – vr
+            - generic [ref=e98]: 12:00 – 18:00
+          - generic [ref=e99]:
+            - generic [ref=e100]: Za
+            - generic [ref=e101]: 12:00 – 17:00
+          - generic [ref=e102]:
+            - generic [ref=e103]: Zo – ma
+            - generic [ref=e104]: gesloten
+      - generic [ref=e105]:
+        - generic [ref=e106]: © Mya Ink · KVK 72358297 · GGD-vergunning
+        - generic [ref=e107]:
+          - link "Privacyverklaring" [ref=e108] [cursor=pointer]:
+            - /url: /privacyverklaring
+          - link "Instagram" [ref=e109] [cursor=pointer]:
+            - /url: https://www.instagram.com/mya_ink/
