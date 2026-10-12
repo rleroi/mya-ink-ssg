@@ -9,7 +9,6 @@
       </div>
       <img src="/images/studio-stoel-800.webp" srcset="/images/studio-stoel-800.webp 800w, /images/studio-stoel-1600.webp 1600w" sizes="520px" width="1600" height="1067" alt="De studio, met planten en de tattoostoel" loading="lazy"
            class="order-2 block w-full lg:max-w-[520px] h-[200px] lg:h-[300px] object-cover rounded lg:mt-2">
-      <div v-if="page.html" class="order-2 info max-w-[520px] text-[15px] leading-[1.7] text-body" v-html="page.html"></div>
       <div class="order-4 flex flex-col lg:max-w-[460px] mt-4 max-lg:bg-white max-lg:-mx-5 max-lg:px-5 max-lg:py-10">
         <p class="eyebrow mb-2">Na je aanvraag</p>
         <div v-for="(item, i) in after" :key="item.title" class="flex gap-4 lg:gap-5 py-4 lg:py-5 border-t border-line last:border-b">
@@ -29,7 +28,9 @@
         <button class="btn btn-dark hidden lg:inline-flex" type="button" @click="state.sent = false">Nog een aanvraag</button>
       </div>
 
-      <form v-else id="afspraak-form" ref="form" class="flex flex-col gap-7 lg:gap-8" novalidate @submit.prevent="sendMail"
+      <template v-else>
+      <div v-if="page.html" class="info text-[15px] leading-[1.7] text-body pb-7 lg:pb-8 mb-7 lg:mb-8 border-b border-line" v-html="page.html"></div>
+      <form id="afspraak-form" ref="form" class="flex flex-col gap-7 lg:gap-8" novalidate @submit.prevent="sendMail"
             action="#" accept-charset="UTF-8" enctype="multipart/form-data" method="POST">
         <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-8">
           <div class="field">
@@ -90,6 +91,7 @@
           {{ state.sending ? 'Bezig met verzenden…' : 'Verzenden' }}
         </button>
       </form>
+      </template>
     </div>
   </section>
 
