@@ -4,7 +4,7 @@
       <p class="eyebrow">Portfolio</p>
       <h1 class="display m-0 text-[48px] md:text-[clamp(48px,7vw,96px)] leading-none">Gezet <span class="italic">met zorg</span></h1>
     </div>
-    <p class="m-0 max-w-[420px] text-base md:text-[17px] leading-[1.7] text-body">Van fineline tot cover-ups en kleur. Alles wat op Instagram verschijnt, staat hier automatisch.</p>
+    <p class="m-0 max-w-[420px] text-base md:text-[17px] leading-[1.7] text-body">Van fineline en black and grey tot kleur, watercolor en cover-ups: een greep uit recent werk.</p>
   </section>
 
   <section class="bg-white">

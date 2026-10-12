@@ -126,8 +126,9 @@
 
     /* Horizontaal swipen op mobiel */
     .swipe {
-        @apply flex gap-3 overflow-x-auto snap-x snap-mandatory px-5 pb-1;
+        @apply flex gap-3 overflow-x-auto overflow-y-hidden snap-x snap-mandatory px-5 pb-1;
         scrollbar-width: none;
+        overscroll-behavior-x: contain;
     }
 
     .swipe::-webkit-scrollbar {

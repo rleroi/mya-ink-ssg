@@ -50,28 +50,29 @@
 
     <footer>
       <div class="container-site pt-12 md:pt-20 pb-8 md:pb-10 flex flex-col gap-8 md:gap-14">
-        <div class="grid grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6 md:gap-10 text-[15px] leading-[1.8]">
-          <img src="/myaink.webp" width="300" height="297" alt="Mya Ink" style="mix-blend-mode: multiply" class="col-span-2 md:col-span-1 w-28 h-28 md:w-[150px] md:h-[150px] object-contain -mt-2.5 -ml-2">
+        <!-- Mobiel: één gecentreerde kolom; vanaf md naast elkaar -->
+        <div class="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] justify-items-center md:justify-items-stretch text-center md:text-left gap-8 md:gap-10 text-[15px] leading-[1.8]">
+          <img src="/myaink.webp" width="300" height="297" alt="Mya Ink" style="mix-blend-mode: multiply" class="w-28 h-28 md:w-[150px] md:h-[150px] object-contain md:-mt-2.5 md:-ml-2">
           <div class="flex flex-col">
             <span class="eyebrow mb-3">Studio</span>
             <span class="text-body">Molenvlietbrink 248</span>
             <span class="text-body">3448 HS Woerden</span>
-            <a href="https://goo.gl/maps/MFzvyKoCisYjUH2C7" target="_blank" rel="noreferrer noopener"><span class="md:hidden">Route</span><span class="hidden md:inline">Route in Google Maps</span></a>
+            <a href="https://goo.gl/maps/MFzvyKoCisYjUH2C7" target="_blank" rel="noreferrer noopener">Route in Google Maps</a>
           </div>
           <div class="flex flex-col">
             <span class="eyebrow mb-3">Contact</span>
-            <a href="mailto:info@mya-ink.nl"><span class="md:hidden">E-mail</span><span class="hidden md:inline">info@mya-ink.nl</span></a>
+            <a href="mailto:info@mya-ink.nl">info@mya-ink.nl</a>
             <a href="tel:0348754071">0348 754 071</a>
             <a href="https://www.instagram.com/mya_ink/" target="_blank" rel="noreferrer noopener">@mya_ink</a>
           </div>
-          <div class="col-span-2 md:col-span-1 flex flex-col">
+          <div class="flex flex-col w-full max-w-[240px] md:max-w-none">
             <span class="eyebrow mb-3">Openingstijden</span>
-            <span class="flex justify-between max-w-[240px]"><span>Di – vr</span><span>12:00 – 18:00</span></span>
-            <span class="flex justify-between max-w-[240px]"><span>Za</span><span>12:00 – 17:00</span></span>
-            <span class="flex justify-between max-w-[240px]"><span>Zo – ma</span><span class="text-muted">gesloten</span></span>
+            <span class="flex justify-between gap-6 md:max-w-[240px]"><span>Di – vr</span><span>12:00 – 18:00</span></span>
+            <span class="flex justify-between gap-6 md:max-w-[240px]"><span>Za</span><span>12:00 – 17:00</span></span>
+            <span class="flex justify-between gap-6 md:max-w-[240px]"><span>Zo – ma</span><span class="text-muted">gesloten</span></span>
           </div>
         </div>
-        <div class="border-t border-line pt-4 md:pt-6 flex flex-wrap justify-between gap-4 text-[13px] text-muted">
+        <div class="border-t border-line pt-4 md:pt-6 flex flex-col md:flex-row md:flex-wrap items-center md:justify-between gap-2 md:gap-4 text-center text-[13px] text-muted">
           <span>© Mya Ink · KVK 72358297 · GGD-vergunning</span>
           <span class="flex gap-6">
             <a class="text-muted" href="/privacyverklaring">Privacyverklaring</a>
