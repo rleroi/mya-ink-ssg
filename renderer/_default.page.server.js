@@ -3,6 +3,7 @@ import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr'
 import { createApp } from './app'
 import logoUrl from './favicon.png'
 import { business, getSeo, SITE_URL } from './seo'
+import { fontPreviewScript } from './fontPreview'
 
 const FONTS_URL = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Manrope:wght@400;500;600&display=swap'
 
@@ -47,6 +48,7 @@ async function render(pageContext) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link rel="stylesheet" href="${FONTS_URL}" />
+        <script>${dangerouslySkipEscape(fontPreviewScript)}</script>
         <script type="speculationrules">${dangerouslySkipEscape(speculationRules)}</script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1CCNVPL8M"></script>
         <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-J1CCNVPL8M');</script>
