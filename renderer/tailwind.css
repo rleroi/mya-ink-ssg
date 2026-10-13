@@ -1,4 +1,4 @@
-/* Fonts (Bodoni Moda + Manrope) are loaded via <link> in renderer/_default.page.server.js */
+/* Fonts (Playfair Display + Manrope) are loaded via <link> in renderer/_default.page.server.js */
 
 @tailwind base;
 @tailwind components;
@@ -136,17 +136,9 @@
     }
 }
 
-/* Bodoni Moda kiest bij grote letters automatisch de optische maat 96, met haarlijntjes
-   die op telefoons bijna wegvallen. Een lage optische maat plus gewicht 500 geeft stevige dunne lijnen. */
+/* Koppen in Playfair Display op gewicht 500: dunne lijnen blijven ook op telefoons goed zichtbaar */
 .font-display, .display, .h2, .rt h1, .rt h2, .rt h3 {
-    font-weight: var(--font-display-weight, 500);
-    font-variation-settings: "opsz" 12;
-}
-
-@media (min-width: 768px) {
-    .font-display, .display, .h2, .rt h1, .rt h2, .rt h3 {
-        font-variation-settings: "opsz" 24;
-    }
+    font-weight: 500;
 }
 
 /* Zachte overgang tussen pagina's (browsers die het ondersteunen) */

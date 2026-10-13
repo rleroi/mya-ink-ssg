@@ -3,7 +3,7 @@
   <section class="container-site pt-4 md:pt-12 pb-14 md:pb-[120px] flex flex-col md:flex-row md:flex-wrap gap-5 md:gap-16 md:items-end">
     <div class="contents md:flex md:flex-[1_1_480px] md:min-w-0 md:flex-col md:gap-8">
       <p class="eyebrow order-1">Tattoostudio · Woerden</p>
-      <h1 class="order-2 display m-0 text-[48px] md:text-[clamp(56px,8vw,108px)] leading-[.95] tracking-[-.02em]">Tattoos op maat,<br><span class="italic text-plum">met aandacht</span> gezet.</h1>
+      <h1 class="order-2 display m-0 text-[42px] md:text-[clamp(48px,5vw,72px)] leading-[1.02] tracking-[-.02em]">Tattoos op maat,<br><span class="italic text-plum">met aandacht</span> gezet.</h1>
       <p class="order-4 m-0 max-w-[440px] text-base md:text-lg leading-[1.6] text-body">Unieke tattoos op maat, met veel oog voor detail, in een private studio in Woerden.</p>
       <div class="order-5 flex flex-wrap gap-4">
         <a class="btn btn-dark hidden lg:inline-flex" href="/afspraak">Maak een afspraak</a>

@@ -20,8 +20,7 @@ module.exports = {
         danger: '#9B2C2C',
       },
       fontFamily: {
-        // --font-display: TEMP font comparison on the preview (renderer/fontPreview.js)
-        display: ['var(--font-display, "Bodoni Moda")', 'Georgia', 'serif'],
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
         sans: ['Manrope', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
