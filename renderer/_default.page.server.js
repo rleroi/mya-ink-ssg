@@ -8,6 +8,10 @@ const FONTS_URL = 'https://fonts.googleapis.com/css2?family=Playfair+Display:ita
 
 // Prefetch internal pages on hover/touch, so the next page opens instantly
 const speculationRules = JSON.stringify({ prefetch: [{ source: 'document', where: { href_matches: '/*' }, eagerness: 'moderate' }] })
+// Preview builds (other branches) serve the share image from their own URL, so link previews
+// work before launch. Cloudflare Pages sets these variables during the build.
+const isPreviewBuild = process.env.CF_PAGES_BRANCH && process.env.CF_PAGES_BRANCH !== 'master'
+const ASSET_URL = isPreviewBuild && process.env.CF_PAGES_URL ? process.env.CF_PAGES_URL : SITE_URL
 const jsonLd = JSON.stringify(business).replace(/</g, '\\u003c')
 
 export { render }
@@ -20,7 +24,7 @@ async function render(pageContext) {
 
   // See https://vite-plugin-ssr.com/head
   const seo = getSeo(pageContext)
-  const ogImage = `${SITE_URL}/images/og.jpg`
+  const ogImage = `${ASSET_URL}/images/og.jpg`
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="nl">
