@@ -65,11 +65,14 @@
             <a href="tel:+31348754071">0348 754 071</a>
             <a href="https://www.instagram.com/mya_ink/" target="_blank" rel="noreferrer noopener">@mya_ink</a>
           </div>
-          <div class="flex flex-col w-full max-w-[240px] md:max-w-none">
+          <div class="flex flex-col items-center md:items-start">
             <span class="eyebrow mb-3">Openingstijden</span>
-            <span class="flex justify-between gap-6 md:max-w-[240px]"><span>Di – vr</span><span>12:00 – 18:00</span></span>
-            <span class="flex justify-between gap-6 md:max-w-[240px]"><span>Za</span><span>12:00 – 17:00</span></span>
-            <span class="flex justify-between gap-6 md:max-w-[240px]"><span>Zo – ma</span><span class="text-muted">gesloten</span></span>
+            <!-- Twee kolommen zo breed als de inhoud: tijden staan onder elkaar, vlak naast de dagen -->
+            <dl class="m-0 grid grid-cols-[auto_auto] gap-x-5 text-left tabular-nums">
+              <dt>Dinsdag t/m vrijdag</dt><dd class="m-0">12:00 – 18:00</dd>
+              <dt>Zaterdag</dt><dd class="m-0">12:00 – 17:00</dd>
+              <dt>Zondag en maandag</dt><dd class="m-0 text-muted">gesloten</dd>
+            </dl>
           </div>
         </div>
         <div class="border-t border-line pt-4 md:pt-6 flex flex-col md:flex-row md:flex-wrap items-center md:justify-between gap-2 md:gap-4 text-center text-[13px] text-muted">
