@@ -135,9 +135,9 @@ const reviews = [
 </script>
 
 <style scoped>
-/* Recent werk: met muis zwart-wit, bij hover kleur + zoom + bijschrift. Touch: altijd in kleur. */
+/* Recent werk: met muis bij hover lichte zoom + bijschrift */
 .work img {
-  transition: filter .7s ease, transform .9s cubic-bezier(.2, .7, .2, 1);
+  transition: transform .9s cubic-bezier(.2, .7, .2, 1);
 }
 
 .caption {
@@ -146,13 +146,8 @@ const reviews = [
 }
 
 @media (hover: hover) {
-  .work img {
-    filter: grayscale(1) contrast(1.05);
-  }
-
   .work:hover img,
   .work:focus-visible img {
-    filter: none;
     transform: scale(1.04);
   }
 
