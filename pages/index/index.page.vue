@@ -36,16 +36,26 @@
       <a href="/portfolio" class="link-arrow"><span class="md:hidden">Alles →</span><span class="hidden md:inline">Naar het portfolio →</span></a>
     </div>
     <div class="swipe md:grid md:grid-cols-4 md:gap-4 md:max-w-site md:mx-auto md:px-10 md:overflow-visible">
-      <a v-for="work in recentWork" :key="work.src" v-reveal href="/portfolio" class="block">
+      <a v-for="work in recentWork" :key="work.src" v-reveal href="/portfolio" class="work block relative overflow-hidden rounded bg-stone">
         <img :src="`/images/${work.src}-600.webp`" :srcset="`/images/${work.src}-600.webp 600w, /images/${work.src}-900.webp 900w`"
              sizes="(min-width: 768px) 25vw, 78vw" width="900" height="900" :alt="work.alt" loading="lazy"
-             class="w-full aspect-[4/5] object-cover rounded block bg-stone">
+             class="w-full aspect-[4/5] object-cover block">
+        <span class="caption" aria-hidden="true">{{ work.label }}</span>
       </a>
     </div>
   </section>
 
-  <img src="/images/studio-800.webp" srcset="/images/studio-800.webp 800w, /images/studio-1600.webp 1600w" sizes="100vw" width="1600" height="1066" alt="De studio aan de Molenvlietbrink" loading="lazy"
-       class="w-full h-[260px] md:h-[560px] object-cover block" style="object-position: center 60%">
+  <figure class="relative m-0">
+    <img src="/images/studio-800.webp" srcset="/images/studio-800.webp 800w, /images/studio-1600.webp 1600w" sizes="100vw" width="1600" height="1066" alt="De studio aan de Molenvlietbrink" loading="lazy"
+         class="w-full h-[320px] md:h-[560px] object-cover block" style="object-position: center 60%">
+    <div class="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent" aria-hidden="true"></div>
+    <figcaption v-reveal class="absolute inset-x-0 bottom-0">
+      <div class="container-site pb-8 md:pb-14 flex flex-col gap-2 md:gap-3 text-paper">
+        <span class="eyebrow !text-fog">De studio</span>
+        <span class="font-display text-[30px] md:text-[48px] leading-[1.05]">Een rustige, private studio <span class="italic">in Woerden</span></span>
+      </div>
+    </figcaption>
+  </figure>
 
   <section class="bg-white">
     <div class="container-site py-14 md:py-[120px] flex flex-col gap-4 md:gap-14">
@@ -105,10 +115,10 @@ defineProps(['page']);
 
 // Vaste selectie; het volledige (Instagram-)portfolio staat op /portfolio
 const recentWork = [
-  {src: 'werk-1', alt: 'Custom koi en draak tattoo'},
-  {src: 'werk-2', alt: 'Fineline tattoo van een figuur op de maan'},
-  {src: 'werk-3', alt: 'Tattoo met zonnebloem, paard en Romeinse cijfers'},
-  {src: 'werk-4', alt: 'Fineline anker tattoo'},
+  {src: 'werk-1', alt: 'Custom koi en draak tattoo', label: 'Koi & draak · custom'},
+  {src: 'werk-2', alt: 'Fineline tattoo van een figuur op de maan', label: 'Op de maan · fineline'},
+  {src: 'werk-3', alt: 'Tattoo met zonnebloem, paard en Romeinse cijfers', label: 'Zonnebloem & paard · black and grey'},
+  {src: 'werk-4', alt: 'Fineline anker tattoo', label: 'Anker · fineline'},
 ];
 
 const steps = [
@@ -125,6 +135,44 @@ const reviews = [
 </script>
 
 <style scoped>
+/* Recent werk: met muis zwart-wit, bij hover kleur + zoom + bijschrift. Touch: altijd in kleur. */
+.work img {
+  transition: filter .7s ease, transform .9s cubic-bezier(.2, .7, .2, 1);
+}
+
+.caption {
+  @apply absolute inset-x-0 bottom-0 px-4 pt-10 pb-4 text-sm text-paper bg-gradient-to-t from-ink/80 to-transparent opacity-0 translate-y-2;
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+@media (hover: hover) {
+  .work img {
+    filter: grayscale(1) contrast(1.05);
+  }
+
+  .work:hover img,
+  .work:focus-visible img {
+    filter: none;
+    transform: scale(1.04);
+  }
+
+  .work:hover .caption,
+  .work:focus-visible .caption {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work img,
+  .caption {
+    transition: none;
+  }
+
+  .work:hover img {
+    transform: none;
+  }
+}
+
 
 .stage {
   @apply relative overflow-hidden rounded bg-stone;
