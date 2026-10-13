@@ -13,7 +13,6 @@
     <div class="stage order-3 md:order-none mt-2 md:mt-0 md:flex-[1_1_420px] min-w-0 h-[420px] md:h-[640px]" role="img" aria-label="Wisselende foto's uit de studio">
       <img src="/images/hero-1-800.webp" srcset="/images/hero-1-800.webp 800w, /images/hero-1-1600.webp 1600w" sizes="(min-width: 768px) 960px, 100vw" width="1600" height="1066" alt="" fetchpriority="high" style="object-position: 45% center">
       <img src="/images/hero-2-800.webp" srcset="/images/hero-2-800.webp 800w, /images/hero-2-1600.webp 1365w" sizes="(min-width: 768px) 50vw, 100vw" width="1365" height="2048" alt="" style="object-position: center 30%" loading="lazy">
-      <img src="/images/hero-3-800.webp" srcset="/images/hero-3-800.webp 800w, /images/hero-3-1600.webp 1600w" sizes="(min-width: 768px) 960px, 100vw" width="1600" height="1066" alt="" style="object-position: 80% center" loading="lazy">
     </div>
   </section>
 
@@ -126,9 +125,6 @@ const reviews = [
 </script>
 
 <style scoped>
-.about :deep(p:first-child) {
-  @apply text-base md:text-[17px] text-body;
-}
 
 .stage {
   @apply relative overflow-hidden rounded bg-stone;
@@ -136,28 +132,25 @@ const reviews = [
 
 .stage img {
   @apply absolute inset-0 w-full h-full object-cover opacity-0;
-  animation: fade 18s infinite, zoom 18s infinite;
+  /* 2 foto's, elk 6 seconden zichtbaar met een overlappende fade */
+  animation: fade 12s infinite, zoom 12s infinite;
 }
 
 .stage img:nth-child(2) {
   animation-delay: 6s;
 }
 
-.stage img:nth-child(3) {
-  animation-delay: 12s;
-}
-
 @keyframes fade {
   0% { opacity: 0 }
-  6% { opacity: 1 }
-  33% { opacity: 1 }
-  40% { opacity: 0 }
+  8% { opacity: 1 }
+  50% { opacity: 1 }
+  58% { opacity: 0 }
   100% { opacity: 0 }
 }
 
 @keyframes zoom {
   0% { transform: scale(1) }
-  40% { transform: scale(1.08) }
+  58% { transform: scale(1.08) }
   100% { transform: scale(1.08) }
 }
 

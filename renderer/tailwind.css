@@ -60,10 +60,6 @@
         @apply text-[17px] md:text-lg leading-[1.75] text-[#2B2927];
     }
 
-    .rt > p:first-child {
-        @apply text-[19px] md:text-[21px] leading-[1.6] text-ink;
-    }
-
     .rt h1, .rt h2, .rt h3 {
         @apply font-display font-normal text-ink;
     }
