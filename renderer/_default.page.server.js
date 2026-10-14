@@ -1,7 +1,17 @@
 import { renderToString } from '@vue/server-renderer'
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr'
 import { createApp } from './app'
-import logoUrl from './favicon.png'
+import { business, getSeo, SITE_URL } from './seo'
+
+const FONTS_URL = 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..600;1,400..600&family=Manrope:wght@400;500;600&display=swap'
+
+// Prefetch internal pages on hover/touch, so the next page opens instantly
+const speculationRules = JSON.stringify({ prefetch: [{ source: 'document', where: { href_matches: '/*' }, eagerness: 'moderate' }] })
+// Preview builds (other branches) serve the share image from their own URL, so link previews
+// work before launch. Cloudflare Pages sets these variables during the build.
+const isPreviewBuild = process.env.CF_PAGES_BRANCH && process.env.CF_PAGES_BRANCH !== 'master'
+const ASSET_URL = isPreviewBuild && process.env.CF_PAGES_URL ? process.env.CF_PAGES_URL : SITE_URL
+const jsonLd = JSON.stringify(business).replace(/</g, '\\u003c')
 
 export { render }
 // See https://vite-plugin-ssr.com/data-fetching
@@ -12,35 +22,38 @@ async function render(pageContext) {
   const appHtml = await renderToString(app)
 
   // See https://vite-plugin-ssr.com/head
-  const { documentProps } = pageContext.exports
-  const title = (documentProps && documentProps.title) || 'Mya-Ink.nl – Tattooshop Woerden'
-  const desc = (documentProps && documentProps.description) || 'Mya-Ink.nl – Tattooshop Woerden'
+  const seo = getSeo(pageContext)
+  const ogImage = `${ASSET_URL}/images/og.jpg`
 
   const documentHtml = escapeInject`<!DOCTYPE html>
-    <html lang="en">
+    <html lang="nl">
       <head>
         <meta charset="UTF-8" />
-        <link rel="icon" href="${logoUrl}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="${desc}" />
-        <title>${title}</title>
+        <title>${seo.title}</title>
+        <meta name="description" content="${seo.description}" />
+        ${seo.noindex ? escapeInject`<meta name="robots" content="noindex" />` : escapeInject`<link rel="canonical" href="${seo.url}" />`}
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="theme-color" content="#F5F4F1" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Mya Ink" />
+        <meta property="og:locale" content="nl_NL" />
+        <meta property="og:title" content="${seo.title}" />
+        <meta property="og:description" content="${seo.description}" />
+        <meta property="og:url" content="${seo.url}" />
+        <meta property="og:image" content="${ogImage}" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Mya aan het werk in haar tattoostudio in Woerden" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="stylesheet" href="${FONTS_URL}" />
+        <script type="speculationrules">${dangerouslySkipEscape(speculationRules)}</script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1CCNVPL8M"></script>
         <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-J1CCNVPL8M');</script>
-        <script type="application/ld+json">
-          {
-            "@context": "https://schema.org",
-            "@type": "TattooParlor",
-            "url": "https://mya-ink.nl",
-            "logo": "https://mya-ink.nl/myaink.png",
-            "image": "https://mya-ink.nl/myaink.png",
-            "name": "Mya Ink",
-            "priceRange": "$$",
-            "currenciesAccepted": "EUR",
-            "paymentAccepted":"Cash, Debit Card",
-            "telephone": "0348 754 071",
-            "address": "Molenvlietbrink 248, 3448 HS Woerden"
-          }
-        </script>
+        <script type="application/ld+json">${dangerouslySkipEscape(jsonLd)}</script>
       </head>
       <body>
         <div id="app">${dangerouslySkipEscape(appHtml)}</div>

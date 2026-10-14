@@ -1,3 +1,12 @@
+name = "mya-ink-ssg"
 compatibility_date = "2023-02-04"
 
 pages_build_output_dir = "dist/client"
+
+# Non-secret config, used for both production and preview builds.
+# Secrets (API_KEY, RESEND_API_KEY) are set as encrypted secrets in the Cloudflare dashboard.
+[vars]
+SPACE_ID = "3x9ge2nnz3e1"
+SLIDESHOW_ID = "2fEmhTwfW70aSUOhnuSeN1"
+CONTACT_EMAIL_FROM = "Mya Ink formulier <formulier@send.mya-ink.nl>"
+CONTACT_EMAIL_TO = "info@mya-ink.nl"

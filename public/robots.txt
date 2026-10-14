@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /slideshow/
+
+Sitemap: https://mya-ink.nl/sitemap.xml

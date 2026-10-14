@@ -1,135 +1,144 @@
 <template>
-    <div class="flex flex-col w-auto max-w-screen-xl xl:mx-auto px-8 py-8 md:px-16 md:py-16">
-<!--  <div class="flex flex-col w-auto max-w-screen-xl xl:mx-auto px-8 py-8 md:px-16 md:py-16"
-       :class="{'h-screen overflow-hidden': state.menuOpen}">-->
+  <!-- Ruimte voor de vaste knoppenbalk onderin op mobiel (afspraakbalk, of 'Aanvraag verzenden' op /afspraak) -->
+  <div class="min-h-screen bg-paper pb-[92px] lg:pb-0">
 
-    <Sidebar v-model:visible="state.menuOpen" position="right" class="pt-4 px-4">
-<!--    <div v-show="state.menuOpen"
-         class="absolute left-0 top-0 w-full h-full z-50 flex flex-col lg:hidden bg-white px-8 py-8">-->
-<!--      <button aria-label="Menu" @click="openMenu(false)" class="ml-auto mb-8">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"
-             focusable="false">
-          <path d="M13 11.8l6.1-6.3-1-1-6.1 6.2-6.1-6.2-1 1 6.1 6.3-6.5 6.7 1 1 6.5-6.6 6.5 6.6 1-1z"></path>
-        </svg>
-      </button>-->
-      <ol class="flex flex-col text-right menu">
-        <li class="mb-4">
-          <Link href="/portfolio">Portfolio</Link>
-        </li>
-        <li class="mb-4">
-          <Link href="/faq">FAQ</Link>
-        </li>
-        <li class="mb-4">
-          <Link href="/risicos">Risico's</Link>
-        </li>
-        <li class="mb-4">
-          <Link href="/nazorg">Nazorg</Link>
-        </li>
-        <li class="mb-4">
-          <Link href="/afspraak">Maak een afspraak</Link>
-        </li>
-      </ol>
-    </Sidebar>
+    <div v-if="melding" role="status" class="bg-plum text-white px-5 md:px-10 py-3 text-center text-sm leading-normal">{{ melding }}</div>
 
-    <div class="flex justify-between items-center relative">
-      <div class="w-1/2 sm:w-1/3">
-        <a href="/" title="Mya Ink">
-          <img class="w-[287px]" src="./myaink.png" alt="Mya Ink - Tattooshop Woerden">
-        </a>
-      </div>
-      <div class="w-1/2 sm:w-2/3 justify-end hidden lg:flex items-center">
-        <Link href="/portfolio">Portfolio</Link>
-        <Link href="/faq">FAQ</Link>
-        <Link href="/risicos">Risico's</Link>
-        <Link href="/nazorg">Nazorg</Link>
-        <Link :cta="true" href="/afspraak">Maak een afspraak</Link>
-      </div>
-      <button aria-label="Menu" class="lg:hidden border border-primary/30 hover:bg-primary/5 transition-all duration-300 rounded-md ml-4 p-2" @click="openMenu(true)">
-        <svg class="fill-primary" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <rect x="4" y="7.5" width="16" height="1.5"></rect>
-          <rect x="4" y="15" width="16" height="1.5"></rect>
-        </svg>
+    <header class="container-site py-5 md:py-8 flex items-center justify-between gap-6">
+      <a href="/" title="Mya Ink" class="no-underline font-display text-[26px] md:text-[32px] tracking-[.01em]">Mya <span class="italic">Ink</span></a>
+      <nav aria-label="Hoofdmenu" class="hidden lg:flex items-center gap-8">
+        <Link href="/portfolio/">Portfolio</Link>
+        <Link href="/faq/">FAQ</Link>
+        <Link href="/risicos/">Risico's</Link>
+        <Link href="/nazorg/">Nazorg</Link>
+        <Link :cta="true" href="/afspraak/">Maak een afspraak</Link>
+      </nav>
+      <button type="button" aria-label="Menu openen" :aria-expanded="state.menuOpen" aria-controls="mobile-menu"
+              class="lg:hidden w-11 h-11 flex items-center justify-center border border-ink rounded-full bg-transparent text-ink cursor-pointer"
+              @click="openMenu(true)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 9h16M4 15h16"></path></svg>
       </button>
+    </header>
+
+    <div v-if="state.menuOpen" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu"
+         class="fixed inset-0 z-50 bg-ink text-paper flex flex-col px-5 pt-5 pb-8 overflow-y-auto lg:hidden"
+         @keydown.esc="openMenu(false)">
+      <div class="flex items-center justify-between">
+        <a href="/" class="font-display text-[26px] no-underline text-paper hover:text-lilac">Mya <span class="italic">Ink</span></a>
+        <button ref="closeButton" type="button" aria-label="Menu sluiten"
+                class="w-11 h-11 flex items-center justify-center border border-paper rounded-full bg-transparent text-paper cursor-pointer"
+                @click="openMenu(false)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+      <nav aria-label="Hoofdmenu" class="mt-14 flex flex-col">
+        <a v-for="item in menuItems" :key="item.href" :href="item.href"
+           :aria-current="trimPath(pageContext.urlPathname) === trimPath(item.href) ? 'page' : null"
+           class="font-display text-[44px] leading-[1.15] no-underline py-1.5"
+           :class="item.cta ? 'italic text-lilac hover:text-white' : 'text-paper hover:text-lilac'">{{ item.label }}</a>
+      </nav>
+      <div class="mt-auto pt-10 flex flex-col gap-1 text-[15px] leading-[1.7] text-fog">
+        <span>Molenvlietbrink 248, Woerden</span>
+        <a class="text-paper hover:text-lilac" href="tel:+31348754071">0348 754 071</a>
+        <a class="text-paper hover:text-lilac" href="https://www.instagram.com/mya_ink/" target="_blank" rel="noreferrer noopener">@mya_ink</a>
+      </div>
     </div>
-    <div class="mt-32">
+
+    <main>
       <slot/>
-    </div>
-    <div class="flex mt-32 justify-between flex-col sm:flex-row">
-      <div class="flex flex-col mr-4 mb-4 sm:mb-0">
-        <strong>Mya Ink</strong>
-        <span>Molenvlietbrink 248</span>
-        <span>3448 HS Woerden</span>
-          <a class="underline" rel="noreferrer noopener" href="https://goo.gl/maps/MFzvyKoCisYjUH2C7" target="_blank">
-            <i class="pi pi-map-marker w-[18px] mr-2"/>
-            <span>Google Maps</span>
-        </a>
-        <a class="underline" href="mailto:info@mya-ink.nl">
-          <i class="pi pi-envelope w-[18px] mr-2"/>
-          <span>info@mya-ink.nl</span>
-        </a>
+    </main>
 
-        <a class="underline" href="tel:0348754071">
-          <i class="pi pi-phone w-[18px] mr-2"/>
-          <span>0348 754 071</span>
-        </a>
-
-        <a class="underline md:hidden" href="https://www.instagram.com/mya_ink/" title="Volg mya_ink op Instagram" target="_blank" rel="noreferer noopener">
-          <svg class="inline w-[18px] mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-          </svg>
-          <span>mya_ink</span>
-        </a>
-      </div>
-      <div class="hidden md:flex justify-center items-center flex-col">
-        <a class="block w-[120px] h-[120px] rounded-full border-2 border-neutral-300 overflow-hidden"
-           href="https://www.instagram.com/mya_ink/" title="Volg mya_ink op Instagram" target="_blank"
-           rel="noreferer noopener">
-          <img src="./mya.png" alt="Mya" class="w-full object-cover"/>
-        </a>
-        <a class="block mt-2" href="https://www.instagram.com/mya_ink/" title="Volg mya_ink op Instagram" target="_blank" rel="noreferer noopener">
-          <svg class="inline w-[18px] mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          <span>mya_ink</span>
-        </a>
-      </div>
-      <!--<div class="hidden md:flex">
-        <a class="relative w-[150px] h-[150px] rounded-full border-2 border-neutral-300 overflow-hidden"
-           href="https://www.instagram.com/mya_ink/" title="Volg mya_ink op Instagram" target="_blank"
-           rel="noreferer noopener">
-          <img src="./mya.png" alt="Mya" class="w-full object-cover"/>
-          <div class="absolute h-full w-full top-0 hover:opacity-0 bg-white/80 backdrop-blur-sm transition-all bg-white backdrop-grayscale duration-300 fill-black text-black flex-col flex justify-center items-center">
-            <svg class="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path
-                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-            <div>mya_ink</div>
+    <footer>
+      <div class="container-site pt-12 md:pt-20 pb-8 md:pb-10 flex flex-col gap-8 md:gap-14">
+        <!-- Mobiel: één gecentreerde kolom; vanaf md naast elkaar -->
+        <div class="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] justify-items-center md:justify-items-stretch text-center md:text-left gap-8 md:gap-10 text-[15px] leading-[1.8]">
+          <img src="/myaink.webp" width="300" height="297" alt="Mya Ink" style="mix-blend-mode: multiply" class="w-28 h-28 md:w-[150px] md:h-[150px] object-contain md:-mt-2.5 md:-ml-2">
+          <div class="flex flex-col">
+            <span class="eyebrow mb-3">Studio</span>
+            <span class="text-body">Molenvlietbrink 248</span>
+            <span class="text-body">3448 HS Woerden</span>
+            <a href="https://goo.gl/maps/MFzvyKoCisYjUH2C7" target="_blank" rel="noreferrer noopener">Route in Google Maps</a>
           </div>
-        </a>
-      </div>-->
-      <div class="flex flex-col">
-        <strong>Openingstijden</strong>
-        <span>Ma: gesloten</span>
-        <span>Di t/m vr: 12:00 – 18:00</span>
-        <span>Za: 12:00 – 17:00</span>
-        <span>Zo: gesloten</span>
+          <div class="flex flex-col">
+            <span class="eyebrow mb-3">Contact</span>
+            <a href="mailto:info@mya-ink.nl">info@mya-ink.nl</a>
+            <a href="tel:+31348754071">0348 754 071</a>
+            <a href="https://www.instagram.com/mya_ink/" target="_blank" rel="noreferrer noopener">@mya_ink</a>
+          </div>
+          <div class="flex flex-col items-center md:items-start">
+            <span class="eyebrow mb-3">Openingstijden</span>
+            <!-- Twee kolommen zo breed als de inhoud: tijden staan onder elkaar, vlak naast de dagen -->
+            <dl class="m-0 grid grid-cols-[auto_auto] gap-x-5 text-left tabular-nums">
+              <dt>Dinsdag t/m vrijdag</dt><dd class="m-0">12:00 – 18:00</dd>
+              <dt>Zaterdag</dt><dd class="m-0">12:00 – 17:00</dd>
+              <dt>Zondag en maandag</dt><dd class="m-0 text-muted">gesloten</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="border-t border-line pt-4 md:pt-6 flex flex-col md:flex-row md:flex-wrap items-center md:justify-between gap-2 md:gap-4 text-center text-[13px] text-muted">
+          <span>© Mya Ink · KVK 72358297</span>
+          <span class="flex gap-6">
+            <a class="text-muted" href="/privacyverklaring/">Privacyverklaring</a>
+            <a class="text-muted" href="https://www.instagram.com/mya_ink/" target="_blank" rel="noreferrer noopener">Instagram</a>
+          </span>
+        </div>
       </div>
+    </footer>
+
+    <div v-if="showBookingBar" class="fixed inset-x-0 bottom-0 z-40 lg:hidden px-5 pt-3 pb-6 bg-paper border-t border-line">
+      <a class="btn btn-dark w-full min-h-[52px]" href="/afspraak/">Maak een afspraak</a>
     </div>
 
-    <Toast position="top-center"/>
+    <div class="fixed top-4 inset-x-0 z-[60] flex flex-col items-center gap-3 px-5 pointer-events-none" aria-live="polite">
+      <div v-for="toast in toasts" :key="toast.id" :role="toast.severity === 'error' ? 'alert' : 'status'"
+           class="pointer-events-auto w-full max-w-md rounded px-5 py-4 flex gap-3.5 items-center text-[15px] shadow-lg"
+           :class="toast.severity === 'success' ? 'bg-ink text-paper' : 'bg-white text-ink border border-danger'">
+        <svg v-if="toast.severity === 'success'" class="shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>
+        <svg v-else class="shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9B2C2C" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>
+        <span><strong class="font-semibold">{{ toast.summary }}</strong> {{ toast.detail }}</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import {reactive} from 'vue';
+import {computed, nextTick, reactive, ref} from 'vue';
 import Link from './Link.vue';
-import Toast from "primevue/toast";
-import Sidebar from "primevue/sidebar";
+import {usePageContext} from './usePageContext';
+import {useToast} from './useToast';
+
+const pageContext = usePageContext();
+const {toasts} = useToast();
+
+const closeButton = ref(null);
 
 const state = reactive({
   menuOpen: false,
 });
 
-function openMenu(isOpen) {
+const menuItems = [
+  {href: '/', label: 'Home'},
+  {href: '/portfolio/', label: 'Portfolio'},
+  {href: '/faq/', label: 'FAQ'},
+  {href: '/risicos/', label: "Risico's"},
+  {href: '/nazorg/', label: 'Nazorg'},
+  {href: '/afspraak/', label: 'Maak een afspraak', cta: true},
+];
+
+// Optionele meldingsbalk (bijv. vakantie) uit Contentful-type 'melding'
+const melding = computed(() => pageContext.pageProps?.melding);
+
+const trimPath = (path) => (path || '').replace(/\/+$/, '') || '/';
+const showBookingBar = computed(() => trimPath(pageContext.urlPathname) !== '/afspraak');
+
+async function openMenu(isOpen) {
   state.menuOpen = isOpen;
+  document.documentElement.style.overflow = isOpen ? 'hidden' : '';
+
+  if (isOpen) {
+    await nextTick();
+    closeButton.value?.focus();
+  }
 }
 
 </script>

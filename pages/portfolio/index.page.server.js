@@ -1,5 +1,5 @@
 import { RenderErrorPage } from "vite-plugin-ssr";
-import { fetchPages, getPageBySlug, state, toPageResource } from "../../server/contentful";
+import { fetchPages, getMelding, getPageBySlug, state, toPageResource } from "../../server/contentful";
 
 const pageSlug = 'portfolio'
 
@@ -21,6 +21,7 @@ export async function onBeforeRender(pageContext) {
         pageContext: {
             pageProps: {
                 page: toPageResource(page),
+                melding: getMelding(),
             }
         }
     };
@@ -38,6 +39,7 @@ export async function prerender() {
         pageContext: {
             pageProps: {
                 page: toPageResource(getPageBySlug(pageSlug)),
+                melding: getMelding(),
             },
         },
         url: `/${pageSlug}`,
