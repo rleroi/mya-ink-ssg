@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="border-t border-line pt-4 md:pt-6 flex flex-col md:flex-row md:flex-wrap items-center md:justify-between gap-2 md:gap-4 text-center text-[13px] text-muted">
-          <span>© Mya Ink · KVK 72358297 · GGD-vergunning</span>
+          <span>© Mya Ink · KVK 72358297</span>
           <span class="flex gap-6">
             <a class="text-muted" href="/privacyverklaring">Privacyverklaring</a>
             <a class="text-muted" href="https://www.instagram.com/mya_ink/" target="_blank" rel="noreferrer noopener">Instagram</a>
