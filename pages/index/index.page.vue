@@ -124,7 +124,7 @@ const recentWork = [
 const steps = [
   {title: 'Aanvraag', text: 'Vertel via het formulier wat je wilt: idee, plek op het lichaam, grootte in cm en een paar voorbeelden.'},
   {title: 'Ontwerp', text: 'Met mijn kunstacademie-achtergrond en jaren ervaring teken ik je ontwerp helemaal op maat. Als het goed voelt, plannen we samen een datum in.'},
-  {title: 'Zetten & nazorg', text: 'In de studio aan de Molenvlietbrink. Daarna krijg je alles mee wat je nodig hebt voor de nazorg.'},
+  {title: 'Zetten & nazorg', text: 'In de studio aan de Molenvlietbrink. Daarna leg ik uit hoe je je tattoo verzorgt, zodat hij mooi geneest.'},
 ];
 
 const reviews = [
