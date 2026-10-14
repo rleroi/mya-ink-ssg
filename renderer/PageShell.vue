@@ -7,11 +7,11 @@
     <header class="container-site py-5 md:py-8 flex items-center justify-between gap-6">
       <a href="/" title="Mya Ink" class="no-underline font-display text-[26px] md:text-[32px] tracking-[.01em]">Mya <span class="italic">Ink</span></a>
       <nav aria-label="Hoofdmenu" class="hidden lg:flex items-center gap-8">
-        <Link href="/portfolio">Portfolio</Link>
-        <Link href="/faq">FAQ</Link>
-        <Link href="/risicos">Risico's</Link>
-        <Link href="/nazorg">Nazorg</Link>
-        <Link :cta="true" href="/afspraak">Maak een afspraak</Link>
+        <Link href="/portfolio/">Portfolio</Link>
+        <Link href="/faq/">FAQ</Link>
+        <Link href="/risicos/">Risico's</Link>
+        <Link href="/nazorg/">Nazorg</Link>
+        <Link :cta="true" href="/afspraak/">Maak een afspraak</Link>
       </nav>
       <button type="button" aria-label="Menu openen" :aria-expanded="state.menuOpen" aria-controls="mobile-menu"
               class="lg:hidden w-11 h-11 flex items-center justify-center border border-ink rounded-full bg-transparent text-ink cursor-pointer"
@@ -33,7 +33,7 @@
       </div>
       <nav aria-label="Hoofdmenu" class="mt-14 flex flex-col">
         <a v-for="item in menuItems" :key="item.href" :href="item.href"
-           :aria-current="pageContext.urlPathname === item.href ? 'page' : null"
+           :aria-current="trimPath(pageContext.urlPathname) === trimPath(item.href) ? 'page' : null"
            class="font-display text-[44px] leading-[1.15] no-underline py-1.5"
            :class="item.cta ? 'italic text-lilac hover:text-white' : 'text-paper hover:text-lilac'">{{ item.label }}</a>
       </nav>
@@ -78,7 +78,7 @@
         <div class="border-t border-line pt-4 md:pt-6 flex flex-col md:flex-row md:flex-wrap items-center md:justify-between gap-2 md:gap-4 text-center text-[13px] text-muted">
           <span>© Mya Ink · KVK 72358297</span>
           <span class="flex gap-6">
-            <a class="text-muted" href="/privacyverklaring">Privacyverklaring</a>
+            <a class="text-muted" href="/privacyverklaring/">Privacyverklaring</a>
             <a class="text-muted" href="https://www.instagram.com/mya_ink/" target="_blank" rel="noreferrer noopener">Instagram</a>
           </span>
         </div>
@@ -86,7 +86,7 @@
     </footer>
 
     <div v-if="showBookingBar" class="fixed inset-x-0 bottom-0 z-40 lg:hidden px-5 pt-3 pb-6 bg-paper border-t border-line">
-      <a class="btn btn-dark w-full min-h-[52px]" href="/afspraak">Maak een afspraak</a>
+      <a class="btn btn-dark w-full min-h-[52px]" href="/afspraak/">Maak een afspraak</a>
     </div>
 
     <div class="fixed top-4 inset-x-0 z-[60] flex flex-col items-center gap-3 px-5 pointer-events-none" aria-live="polite">
@@ -118,17 +118,18 @@ const state = reactive({
 
 const menuItems = [
   {href: '/', label: 'Home'},
-  {href: '/portfolio', label: 'Portfolio'},
-  {href: '/faq', label: 'FAQ'},
-  {href: '/risicos', label: "Risico's"},
-  {href: '/nazorg', label: 'Nazorg'},
-  {href: '/afspraak', label: 'Maak een afspraak', cta: true},
+  {href: '/portfolio/', label: 'Portfolio'},
+  {href: '/faq/', label: 'FAQ'},
+  {href: '/risicos/', label: "Risico's"},
+  {href: '/nazorg/', label: 'Nazorg'},
+  {href: '/afspraak/', label: 'Maak een afspraak', cta: true},
 ];
 
 // Optionele meldingsbalk (bijv. vakantie) uit Contentful-type 'melding'
 const melding = computed(() => pageContext.pageProps?.melding);
 
-const showBookingBar = computed(() => pageContext.urlPathname !== '/afspraak');
+const trimPath = (path) => (path || '').replace(/\/+$/, '') || '/';
+const showBookingBar = computed(() => trimPath(pageContext.urlPathname) !== '/afspraak');
 
 async function openMenu(isOpen) {
   state.menuOpen = isOpen;

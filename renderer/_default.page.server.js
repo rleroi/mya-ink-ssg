@@ -1,7 +1,6 @@
 import { renderToString } from '@vue/server-renderer'
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr'
 import { createApp } from './app'
-import logoUrl from './favicon.png'
 import { business, getSeo, SITE_URL } from './seo'
 
 const FONTS_URL = 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..600;1,400..600&family=Manrope:wght@400;500;600&display=swap'
@@ -34,7 +33,7 @@ async function render(pageContext) {
         <title>${seo.title}</title>
         <meta name="description" content="${seo.description}" />
         ${seo.noindex ? escapeInject`<meta name="robots" content="noindex" />` : escapeInject`<link rel="canonical" href="${seo.url}" />`}
-        <link rel="icon" href="${logoUrl}" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#F5F4F1" />
         <meta property="og:type" content="website" />

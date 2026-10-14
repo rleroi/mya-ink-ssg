@@ -24,5 +24,6 @@ const props = defineProps({
   cta: Boolean
 })
 
-const isActive = computed(() => pageContext.urlPathname === attrs.href)
+const trim = (path) => (path || '').replace(/\/+$/, '') || '/'
+const isActive = computed(() => trim(pageContext.urlPathname) === trim(attrs.href))
 </script>

@@ -6,8 +6,8 @@
       <h1 class="order-2 display m-0 text-[42px] md:text-[clamp(48px,5vw,72px)] leading-[1.02] tracking-[-.02em]">Tattoos op maat,<br><span class="italic text-plum">met aandacht</span> gezet.</h1>
       <p class="order-4 m-0 max-w-[440px] text-base md:text-lg leading-[1.6] text-body">Unieke tattoos op maat, met veel oog voor detail, in een private studio in Woerden.</p>
       <div class="order-5 flex flex-wrap gap-4">
-        <a class="btn btn-dark hidden lg:inline-flex" href="/afspraak">Maak een afspraak</a>
-        <a class="btn btn-line w-full sm:w-auto" href="/portfolio">Bekijk portfolio</a>
+        <a class="btn btn-dark hidden lg:inline-flex" href="/afspraak/">Maak een afspraak</a>
+        <a class="btn btn-line w-full sm:w-auto" href="/portfolio/">Bekijk portfolio</a>
       </div>
     </div>
     <div class="stage order-3 md:order-none mt-2 md:mt-0 md:flex-[1_1_420px] min-w-0 h-[420px] md:h-[640px]" role="img" aria-label="Wisselende foto's uit de studio">
@@ -25,7 +25,7 @@
         <p class="eyebrow">Over de studio</p>
         <h2 class="h2">Eén artiest, één stoel,<br class="hidden md:inline"> <span class="italic">alle aandacht</span> voor jou.</h2>
         <div v-if="page.html" class="rt about max-w-[520px] !text-base md:!text-[17px] !leading-[1.7] !text-body" v-html="page.html"></div>
-        <a href="/faq" class="link-arrow min-h-[44px] flex items-center">Lees de veelgestelde vragen →</a>
+        <a href="/faq/" class="link-arrow min-h-[44px] flex items-center">Lees de veelgestelde vragen →</a>
       </div>
     </div>
   </section>
@@ -33,10 +33,10 @@
   <section class="py-14 md:py-[120px]">
     <div class="container-site flex flex-wrap justify-between items-end gap-6 mb-6 md:mb-12">
       <h2 class="h2">Recent <span class="italic">werk</span></h2>
-      <a href="/portfolio" class="link-arrow"><span class="md:hidden">Alles →</span><span class="hidden md:inline">Naar het portfolio →</span></a>
+      <a href="/portfolio/" class="link-arrow"><span class="md:hidden">Alles →</span><span class="hidden md:inline">Naar het portfolio →</span></a>
     </div>
     <div class="swipe md:grid md:grid-cols-4 md:gap-4 md:max-w-site md:mx-auto md:px-10 md:overflow-visible">
-      <a v-for="work in recentWork" :key="work.src" v-reveal href="/portfolio" class="work block relative overflow-hidden rounded bg-stone">
+      <a v-for="work in recentWork" :key="work.src" v-reveal href="/portfolio/" class="work block relative overflow-hidden rounded bg-stone">
         <img :src="`/images/${work.src}-600.webp`" :srcset="`/images/${work.src}-600.webp 600w, /images/${work.src}-900.webp 900w`"
              sizes="(min-width: 768px) 25vw, 78vw" width="900" height="900" :alt="work.alt" loading="lazy"
              class="w-full aspect-[4/5] object-cover block">
@@ -99,7 +99,7 @@
       <div v-reveal class="flex flex-col items-start gap-6 md:gap-8">
         <h2 class="h2 !text-[40px] md:!text-[clamp(40px,5vw,72px)] !leading-none">Klaar voor je<br class="hidden md:inline"> <span class="italic">volgende tattoo?</span></h2>
         <p class="m-0 max-w-[420px] text-[15px] md:text-[17px] leading-[1.7] text-fog">Vertel wat je in gedachten hebt. Je hoort binnen 3 werkdagen van me.</p>
-        <a class="btn btn-light hidden lg:inline-flex" href="/afspraak">Maak een afspraak</a>
+        <a class="btn btn-light hidden lg:inline-flex" href="/afspraak/">Maak een afspraak</a>
       </div>
     </div>
   </section>

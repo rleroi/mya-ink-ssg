@@ -86,7 +86,7 @@
           <input v-model="state.adult" type="checkbox" required class="w-5 h-5 m-0 accent-ink" :aria-invalid="invalid('adult')">
           Ik ben 18 jaar of ouder *
         </label>
-        <p class="m-0 -mt-3 text-[13px] leading-normal text-muted">Je gegevens gebruik ik alleen om je aanvraag te beantwoorden. Lees de <a href="/privacyverklaring" class="text-muted underline underline-offset-2">privacyverklaring</a>.</p>
+        <p class="m-0 -mt-3 text-[13px] leading-normal text-muted">Je gegevens gebruik ik alleen om je aanvraag te beantwoorden. Lees de <a href="/privacyverklaring/" class="text-muted underline underline-offset-2">privacyverklaring</a>.</p>
         <button class="btn btn-dark hidden lg:inline-flex self-start min-w-[200px]" type="submit" :disabled="state.sending">
           {{ state.sending ? 'Bezig met verzenden…' : 'Verzenden' }}
         </button>

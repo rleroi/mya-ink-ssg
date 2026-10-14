@@ -12,7 +12,7 @@ function createApp(pageContext) {
   const { melding, ...pageProps } = pageContext.pageProps || {}
 
   // Skip PageShell for slideshow page
-  const skipPageShell = urlPathname === '/slideshow'
+  const skipPageShell = urlPathname.replace(/\/+$/, '') === '/slideshow'
 
   const PageWithLayout = {
     render() {
