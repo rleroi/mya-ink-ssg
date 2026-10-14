@@ -36,7 +36,7 @@
         <p>De grondslag hiervoor is dat de verwerking nodig is om op jouw verzoek een afspraak (overeenkomst) voor te bereiden en uit te voeren. Ik gebruik je gegevens niet voor nieuwsbrieven of reclame en verkoop ze nooit aan anderen.</p>
 
         <h2>Hoe lang bewaar ik je gegevens?</h2>
-        <p>Ik bewaar je gegevens niet langer dan nodig. Leidt een aanvraag niet tot een afspraak, dan verwijder ik je gegevens uiterlijk 12 maanden na ons laatste contact. Gegevens die ik wettelijk moet bewaren, zoals voor de belastingadministratie, bewaar ik zolang de wet dat voorschrijft.</p>
+        <p>Ik bewaar je gegevens niet langer dan nodig is om je aanvraag af te handelen. Gegevens die ik wettelijk moet bewaren, zoals voor de belastingadministratie, bewaar ik zolang de wet dat voorschrijft.</p>
 
         <h2>Wie ontvangt je gegevens?</h2>
         <p>Ik werk met een paar externe diensten die gegevens namens mij verwerken:</p>
